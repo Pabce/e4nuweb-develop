@@ -10,8 +10,6 @@ Before starting, make sure you have:
 
 - **Git**, used to download the website code.
 - **Python 3**, used to start a small local web server.
-- A modern web browser such as Chrome, Firefox, Safari, or Edge.
-- An internet connection, because the site loads Tailwind CSS and fonts from external CDNs.
 
 On macOS, Git and Python are often already available. To check, open Terminal and run:
 
@@ -19,8 +17,6 @@ On macOS, Git and Python are often already available. To check, open Terminal an
 git --version
 python3 --version
 ```
-
-If either command is missing, install Git from [git-scm.com](https://git-scm.com/) and Python from [python.org](https://www.python.org/downloads/).
 
 ## Clone the Repository
 
@@ -32,7 +28,7 @@ git clone https://github.com/Pabce/e4nuweb.git
 cd e4nuweb
 ```
 
-The final command moves you into the website folder. All commands below assume you are inside that `e4nuweb` folder.
+All commands below assume you are inside the `e4nuweb` folder.
 
 ## Run the Website Locally
 
@@ -95,5 +91,3 @@ http://localhost:8080/
 ```
 
 If the page appears without styling, confirm that you are connected to the internet. The current site loads Tailwind CSS and fonts from external services.
-
-If images or publication data do not load correctly, make sure you are using the local server URL, such as `http://localhost:8000/`, rather than opening `index.html` directly from Finder.
