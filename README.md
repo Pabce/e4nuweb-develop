@@ -74,6 +74,38 @@ Most edits happen in these files and folders:
 
 After saving a change, refresh the browser page to see it.
 
+## Collaborating with the Develop Preview
+
+The live production site is published from the `main` branch at:
+
+```text
+https://e4nu.org/
+```
+
+Collaborators should make shared work on the `develop` branch first:
+
+```sh
+git switch develop
+git pull
+```
+
+After making and testing changes locally, commit and push them to `develop`:
+
+```sh
+git status
+git add path/to/changed-file
+git commit -m "Describe the website change"
+git push origin develop
+```
+
+Every push to `develop` automatically updates the preview site:
+
+```text
+https://pabce.github.io/e4nuweb-develop/
+```
+
+Use the preview site to check the online result before opening or merging a pull request into `main`. Merging into `main` updates the production site at `https://e4nu.org/`.
+
 ## Troubleshooting
 
 If `http://localhost:8000/` does not open, check that the Terminal server is still running and that you started it from inside the `e4nuweb` folder.
