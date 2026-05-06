@@ -1,0 +1,72 @@
+[
+  {
+    "id": "proton-transparency-neutrino-physics",
+    "title": "Proton Transparency and Neutrino Physics: New Methods and Modeling",
+    "authors": "S. Dytman, M. Betancourt, N. Steinberg, L.B. Weinstein, A. Ashkenazi et al.",
+    "published": "2025-08-01",
+    "summary": "New data-driven measurement of proton transparency using CLAS electron-nucleus scattering on He, C, and Fe targets. Transparency is defined as the ratio of events with a detected proton to quasi-elastic events where a proton should have been knocked out, avoiding model dependence of earlier extractions. Results are consistent with previous measurements but reveal that GENIE needs improved nuclear ground-state and FSI modeling, particularly at low proton momenta.",
+    "imageSrc": "assets/images/pubs/transparency.webp",
+    "imageFallbackSrc": "assets/images/pubs/transparency.png",
+    "imageAlt": "Proton transparency vs momentum for He, C, Fe",
+    "paperUrl": "https://arxiv.org/abs/2508.01905",
+    "citationText": "arXiv",
+    "citationLinkLabel": "2508.01905 [hep-ex]",
+    "citationLinkUrl": "https://arxiv.org/abs/2508.01905"
+  },
+  {
+    "id": "radiative-effects-neutrino-generators",
+    "title": "A universal implementation of radiative effects in neutrino event generators",
+    "authors": "J. Tena Vidal, A. Ashkenazi, L.B. Weinstein, P.G. Blunden, S. Dytman, N. Steinberg",
+    "published": "2024-09-01",
+    "summary": "Implements QED radiative corrections, real photon emission by incident and scattered electrons, plus virtual-photon exchange and vacuum polarization, into neutrino event generators using the extended peaking approximation. Validated within GENIE, the framework enables proper unfolding of radiative effects when benchmarking electron-nucleus data against generator predictions, closing a long-standing gap in e-A/nu-A comparisons.",
+    "imageSrc": "assets/images/pubs/radiative.webp",
+    "imageFallbackSrc": "assets/images/pubs/radiative.png",
+    "imageAlt": "Radiated vs unradiated eGENIE missing energy and momentum",
+    "paperUrl": "https://arxiv.org/abs/2409.05736",
+    "citationText": "Comput. Phys. Commun. 310 (2025) 109509",
+    "citationLinkLabel": "arXiv: 2409.05736",
+    "citationLinkUrl": "https://arxiv.org/abs/2409.05736"
+  },
+  {
+    "id": "electron-scattering-neutrino-physics-review",
+    "title": "Electron scattering and neutrino physics",
+    "authors": "A. M. Ankowski et al.",
+    "published": "2022-03-01",
+    "summary": "Comprehensive topical review on how electron-nucleus scattering data constrain neutrino interaction models across the QE, resonance, DIS, and MEC channels from tens of MeV to several GeV. Outlines the critical role of e-A measurements in reducing nuclear-interaction systematics for DUNE, Hyper-K, and the broader oscillation program. A community white-paper with 53 authors spanning the e-A and nu-A fields.",
+    "imageSrc": "assets/images/pubs/electron_scattering.webp",
+    "imageFallbackSrc": "assets/images/pubs/electron_scattering.png",
+    "imageAlt": "Kinematic coverage of e-A data on carbon overlaid with DUNE flux",
+    "paperUrl": "https://arxiv.org/abs/2203.06853",
+    "citationText": "J. Phys. G: Nucl. Part. Phys. 50 120501 (2023)",
+    "citationLinkLabel": "arXiv: 2203.06853",
+    "citationLinkUrl": "https://arxiv.org/abs/2203.06853"
+  },
+  {
+    "id": "electron-beam-energy-reconstruction",
+    "title": "Electron-beam energy reconstruction for neutrino oscillation measurements",
+    "authors": "M. Khachatryan, A. Papadopoulou, A. Ashkenazi et al.",
+    "published": "2021-11-01",
+    "summary": "Landmark e4nu result exploiting the known electron beam energy as a proxy for the unknown neutrino energy to benchmark energy-reconstruction methods on CLAS data (C, Fe targets). Demonstrates that calorimetric reconstruction outperforms QE-based approaches, reducing biases from nuclear effects. Reveals that current neutrino generators mis-reconstruct the incident energy at the few-percent level, directly relevant for oscillation delta_CP measurements.",
+    "imageSrc": "assets/images/pubs/ereco.webp",
+    "imageFallbackSrc": "assets/images/pubs/ereco.png",
+    "imageAlt": "QE reconstructed energy showing data vs GENIE SuSAv2 and G2018",
+    "paperUrl": "https://doi.org/10.1038/s41586-021-04046-5",
+    "citationText": "Nature 599, 565-570 (2021)",
+    "citationLinkLabel": "doi:10.1038/s41586-021-04046-5",
+    "citationLinkUrl": "https://doi.org/10.1038/s41586-021-04046-5"
+  },
+  {
+    "id": "inclusive-electron-scattering-genie",
+    "title": "Inclusive Electron Scattering And The GENIE Neutrino Event Generator",
+    "authors": "A. Papadopoulou, A. Ashkenazi et al.",
+    "published": "2020-09-01",
+    "summary": "First systematic test of GENIE's electron-scattering mode against inclusive (e,e') cross-section data. Incorporates radiative corrections and the SuSAv2-based QE+MEC model into the generator. Shows adequate agreement at lower beam energies but exposes discrepancies in the RES/DIS regime at higher energies, charting the path for improved nuclear modeling in neutrino generators.",
+    "imageSrc": "assets/images/pubs/inclusive.webp",
+    "imageFallbackSrc": "assets/images/pubs/inclusive.png",
+    "imageAlt": "Inclusive C and Fe cross sections comparing GSuSAv2 and G2018 to data",
+    "paperUrl": "https://arxiv.org/abs/2009.07228",
+    "citationText": "Phys. Rev. D 103, 113003 (2021)",
+    "citationLinkLabel": "arXiv: 2009.07228",
+    "citationLinkUrl": "https://arxiv.org/abs/2009.07228"
+  }
+]

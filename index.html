@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>e4nu — Electrons for Neutrinos</title>
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#0a1628">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="assets/js/tailwind.config.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/site.css">
+</head>
+
+<body class="bg-navy text-gray-200 font-sans antialiased">
+
+  <div class="site-intro" id="site-intro" role="dialog" aria-modal="true" aria-labelledby="site-intro-title" aria-hidden="true" hidden>
+    <div class="site-intro__backdrop" aria-hidden="true"></div>
+    <div class="site-intro__grid" aria-hidden="true"></div>
+    <div class="site-intro__beam site-intro__beam--electron" aria-hidden="true"></div>
+    <div class="site-intro__beam site-intro__beam--neutrino" aria-hidden="true"></div>
+    <div class="site-intro__collision" aria-hidden="true">
+      <span class="site-intro__collision-ring"></span>
+      <span class="site-intro__collision-ring site-intro__collision-ring--delayed"></span>
+      <span class="site-intro__collision-core"></span>
+    </div>
+    <div class="site-intro__marker site-intro__marker--electron" aria-hidden="true">
+      <span class="site-intro__marker-dot"></span>
+      <span>e- beam</span>
+    </div>
+    <div class="site-intro__marker site-intro__marker--neutrino" aria-hidden="true">
+      <span class="site-intro__marker-dot"></span>
+      <span><span class="site-intro__literal-greek">&nu;<sub>&mu;</sub></span> analogue</span>
+    </div>
+    <div class="site-intro__veil site-intro__veil--top" aria-hidden="true"></div>
+    <div class="site-intro__veil site-intro__veil--bottom" aria-hidden="true"></div>
+
+    <div class="site-intro__panel">
+      <span class="site-intro__eyebrow">Collaborator Reveal</span>
+      <h1 class="site-intro__title" id="site-intro-title">
+        <picture>
+          <source srcset="assets/logos/e4nu-logo.webp" type="image/webp">
+          <img src="assets/logos/e4nu-logo.png" alt="e4nu" class="site-intro__logo">
+        </picture>
+      </h1>
+      <p class="site-intro__copy">
+        Fire two visibly converging beams into a shared interaction vertex, then let the collaboration site break into focus.
+      </p>
+      <div class="site-intro__sequence" aria-hidden="true">
+        <span class="site-intro__sequence-step" data-intro-seq="beam">Beam In</span>
+        <span class="site-intro__sequence-step" data-intro-seq="collision">Vertex Flash</span>
+        <span class="site-intro__sequence-step" data-intro-seq="reveal">Site Open</span>
+      </div>
+      <p class="site-intro__status" id="site-intro-status" aria-live="polite">
+        Align the beams, trigger the shared vertex, and open the collaboration site.
+      </p>
+      <button type="button" class="site-intro__button" id="site-intro-trigger">
+        Reveal the Collaboration
+      </button>
+      <p class="site-intro__hint">Click anywhere or press Enter on the button to begin.</p>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav id="navbar" class="fixed top-0 w-full z-50 nav-blur bg-navy/80 border-b border-white/5 transition-all duration-300">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#hero" class="flex items-center gap-3 group">
+        <picture>
+          <source srcset="assets/logos/e4nu-logo.webp" type="image/webp">
+          <img src="assets/logos/e4nu-logo.png" alt="e4nu" class="nav-logo">
+        </picture>
+      </a>
+      <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+        <a href="#about" class="text-gray-400 hover:text-accent transition-colors">About</a>
+        <a href="#photos" class="text-gray-400 hover:text-accent transition-colors">Photos</a>
+        <a href="#team" class="text-gray-400 hover:text-accent transition-colors">Team</a>
+        <a href="#publications" class="text-gray-400 hover:text-accent transition-colors">Publications</a>
+        <a href="#talks" class="text-gray-400 hover:text-accent transition-colors">Talks</a>
+        <a href="#join" class="px-4 py-2 bg-accent/10 text-accent border border-accent/30 rounded-full hover:bg-accent/20 transition-all">
+          Join Us
+        </a>
+      </div>
+      <!-- Mobile menu button -->
+      <button id="mobile-menu-btn" class="md:hidden text-gray-400 hover:text-white">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-white/5 bg-navy/95 nav-blur">
+      <div class="px-6 py-4 flex flex-col gap-4 text-sm font-medium">
+        <a href="#about" class="text-gray-400 hover:text-accent transition-colors mobile-link">About</a>
+        <a href="#photos" class="text-gray-400 hover:text-accent transition-colors mobile-link">Photos</a>
+        <a href="#team" class="text-gray-400 hover:text-accent transition-colors mobile-link">Team</a>
+        <a href="#publications" class="text-gray-400 hover:text-accent transition-colors mobile-link">Publications</a>
+        <a href="#talks" class="text-gray-400 hover:text-accent transition-colors mobile-link">Talks</a>
+        <a href="#join" class="text-accent mobile-link">Join Us</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="hero" class="hero-gradient relative min-h-screen flex items-center justify-center overflow-hidden">
+    <!-- Animated dark gradient overlay -->
+    <div class="hero-overlay"></div>
+
+    <!-- Particle field -->
+    <div class="particle-field" id="particles"></div>
+
+    <!-- Decorative orbits -->
+    <div class="orbit orbit-duration-20 w-[500px] h-[500px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-30"></div>
+    <div class="orbit orbit-duration-30 orbit-direction-reverse w-[700px] h-[700px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-20"></div>
+    <div class="orbit orbit-duration-40 w-[900px] h-[900px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-10"></div>
+
+    <!-- Glowing electron dot on orbit -->
+    <div class="orbit-electron absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] opacity-30">
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-accent rounded-full shadow-[0_0_15px_rgba(56,189,248,0.8)]"></div>
+    </div>
+
+    <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
+      <div class="mb-6">
+        <span class="inline-block px-4 py-1.5 text-xs font-mono font-medium tracking-widest uppercase text-accent/80 border border-accent/20 rounded-full bg-accent/5">
+          Electrons for Neutrinos Collaboration
+        </span>
+      </div>
+      <h1 class="mb-6">
+        <picture>
+          <source srcset="assets/logos/e4nu-logo.webp" type="image/webp">
+          <img src="assets/logos/e4nu-logo.png" alt="e4nu" class="hero-logo hero-logo-fixed">
+        </picture>
+      </h1>
+      <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed mb-10">
+        Precision electron-nucleus measurements to inform, constrain, and validate models of neutrino-nucleus interactions.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="#about" class="px-8 py-3 bg-accent text-navy font-semibold rounded-full hover:bg-glow transition-colors">
+          Learn More
+        </a>
+        <a href="#join" class="px-8 py-3 border border-white/20 text-white rounded-full hover:border-accent/50 hover:text-accent transition-all">
+          Join the Collaboration
+        </a>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-gray-500 text-xs animate-bounce">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="relative py-32 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="reveal grid md:grid-cols-2 gap-16 items-center">
+        <div>
+          <span class="text-accent font-mono text-sm tracking-widest uppercase mb-4 block">About</span>
+          <h2 class="text-4xl md:text-5xl font-bold text-white mb-8 leading-tight">
+            The Electrons for<br>Neutrinos Collaboration
+          </h2>
+          <div class="w-16 h-1 bg-accent/50 rounded-full mb-8"></div>
+        </div>
+        <div class="space-y-6 text-gray-400 leading-relaxed">
+          <p>
+            The extraction of oscillation parameters from neutrino oscillation measurements relies on 
+            detailed understanding of neutrino-nucleus interactions and the reconstruction of incident neutrino energy. 
+            With the increased statistics delivered by more powerful neutrino production beams in next-generation accelerator-based experiments
+            like DUNE and Hyper-K, nuclear interaction uncertainties will become a leading and limiting systematic for the analysis of
+            neutrino oscillation measurements.
+          </p>
+          <p>
+            Building on the large similarity of electron- and neutrino-nucleus interactions,
+            the electrons-for-neutrinos collaboration is leading a set of precision electron-nucleus interaction measurements
+            at various beam energies and target nuclei to test, constrain, and validate models of neutrino-nucleus interactions.
+          </p>
+          <p class="text-accent/80 font-medium italic border-l-2 border-accent/30 pl-4">
+            We welcome all neutrino physicists to join our effort!
+          </p>
+        </div>
+      </div>
+
+      <!-- Key highlights -->
+      <div class="reveal grid md:grid-cols-3 gap-8 mt-20">
+        <div class="p-8 rounded-2xl bg-white/[0.03] border border-white/5 card-hover">
+          <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611l-.772.13c-1.696.285-3.41.45-5.138.516m-7.425-3.86L5 14.5m0 0L3.2 16.3l-1.402 1.402c-1.232 1.232-.65 3.318 1.067 3.611l.772.13c1.696.285 3.41.45 5.138.516"/>
+            </svg>
+          </div>
+          <h3 class="text-white font-semibold text-lg mb-3">Precision Measurements</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Electron-nucleus interaction measurements at various beam energies
+             and target nuclei using CLAS6 and CLAS12 detectors at Jefferson Lab.</p>
+        </div>
+        <div class="p-8 rounded-2xl bg-white/[0.03] border border-white/5 card-hover">
+          <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v-5.5m3 5.5v-2m3 2v-4"/>
+            </svg>
+          </div>
+          <h3 class="text-white font-semibold text-lg mb-3">Model Validation</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Testing and constraining theoretical models 
+            crucial for neutrino-nucleus interaction modeling, and their implementation in event generators like GENIE.</p>
+        </div>
+        <div class="p-8 rounded-2xl bg-white/[0.03] border border-white/5 card-hover">
+          <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"/>
+            </svg>
+          </div>
+          <h3 class="text-white font-semibold text-lg mb-3">International Collaboration</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">A global effort spanning institutions across Israel, the United States, Spain, and the United Kingdom working together on neutrino physics.</p>
+        </div>
+      </div>
+
+      <div class="reveal mt-16 about-illustrations" data-about-tabs>
+        <div class="mb-6">
+          <h3 class="text-2xl md:text-3xl font-semibold text-white tracking-tight">Interaction Channels and the CVC Bridge</h3>
+          <p class="text-gray-400 mt-2 max-w-3xl">Different reaction channels overlap inside the nucleus, and CVC explains how the vector-sector lessons from electron scattering carry into weak charged-current predictions.</p>
+        </div>
+        <div class="about-tab-bar" role="tablist" aria-label="About page interaction illustrations">
+          <button type="button" class="about-tab-button is-active" id="about-tab-electron" data-about-tab-button="electron" role="tab" aria-selected="true" aria-controls="about-panel-electron" tabindex="0">Quasielastic (QE)</button>
+          <button type="button" class="about-tab-button" id="about-tab-fsi" data-about-tab-button="fsi" role="tab" aria-selected="false" aria-controls="about-panel-fsi" tabindex="-1">FSI</button>
+          <button type="button" class="about-tab-button" id="about-tab-mec" data-about-tab-button="mec" role="tab" aria-selected="false" aria-controls="about-panel-mec" tabindex="-1">2p2h / MEC</button>
+          <button type="button" class="about-tab-button" id="about-tab-res" data-about-tab-button="res" role="tab" aria-selected="false" aria-controls="about-panel-res" tabindex="-1">RES</button>
+          <button type="button" class="about-tab-button" id="about-tab-dis" data-about-tab-button="dis" role="tab" aria-selected="false" aria-controls="about-panel-dis" tabindex="-1">DIS</button>
+          <button type="button" class="about-tab-button" id="about-tab-cvc" data-about-tab-button="cvc" role="tab" aria-selected="false" aria-controls="about-panel-cvc" tabindex="-1">CVC Bridge</button>
+        </div>
+
+        <div class="about-tab-panels mt-6">
+          <section class="about-tab-panel" id="about-panel-electron" data-about-tab-panel="electron" role="tabpanel" aria-labelledby="about-tab-electron">
+            <div class="interaction-card interaction-card-qe rounded-3xl border border-white/10 p-6 md:p-10">
+              <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+                <div>
+                  <h3 class="text-2xl md:text-3xl font-semibold text-white tracking-tight">Quasielastic (QE)</h3>
+                  <p class="text-gray-400 mt-2 max-w-3xl">Two QE interactions are illustrated: <span class="font-mono text-accent">(e,e&apos;p)</span> electron scattering <span class="font-mono text-amber-200">&gamma;</span> exchange, followed by a <span class="font-mono text-emerald-200">&nu;<sub>&mu;</sub></span> charged-current interaction with <span class="font-mono text-emerald-200">W+</span> exchange. We see the shared lepton-plus-proton topology.</p>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                  <span class="inline-flex items-center self-start px-3 py-1 rounded-full text-xs font-mono tracking-wide text-amber-200 border border-amber-300/40 bg-amber-300/10">Exchanged bosons: &gamma;* / W+</span>
+                </div>
+              </div>
+
+              <div class="qe-phase-stack mt-8" aria-label="Parallel quasielastic interaction phases">
+                <div class="interaction-phase-list qe-phase-list qe-phase-list-electron" aria-hidden="true">
+                  <div class="interaction-phase-chip"><span class="interaction-phase-index">1.</span>Incoming electron</div>
+                  <div class="interaction-phase-chip"><span class="interaction-phase-index">2.</span>Virtual photon exchange</div>
+                  <div class="interaction-phase-chip"><span class="interaction-phase-index">3.</span>Deflected electron and proton knockout</div>
+                </div>
+                <div class="interaction-phase-list qe-phase-list qe-phase-list-neutrino" aria-hidden="true">
+                  <div class="interaction-phase-chip"><span class="interaction-phase-index">1.</span>Incoming &nu;<sub>&mu;</sub></div>
+                  <div class="interaction-phase-chip"><span class="interaction-phase-index">2.</span>W+ exchange converts n to p</div>
+                  <div class="interaction-phase-chip"><span class="interaction-phase-index">3.</span>Outgoing &mu;- and proton</div>
+                </div>
+              </div>
+
+              <div class="interaction-grid interaction-grid-stack mt-8">
+                <div class="interaction-stage interaction-stage-qe rounded-3xl" role="img" aria-label="Looping comparison between electron quasielastic scattering and muon-neutrino charged-current quasielastic scattering, each showing an incoming lepton, boson exchange with one bound nucleon, and an outgoing charged lepton plus proton">
+                  <div class="qe-stage-track">
+                    <div class="qe-scene qe-scene-electron" aria-hidden="true">
+                      <span class="qe-scene-badge qe-scene-badge-electron">Electron QE</span>
+                      <svg class="interaction-svg" viewBox="0 0 860 340" aria-hidden="true">
+                        <path class="interaction-track electron-in-track" d="M80 180 C170 180 280 178 365 170" />
+                        <path class="interaction-track electron-out-track" d="M365 170 C470 150 610 125 730 90" />
+                        <path class="interaction-track proton-track" d="M430 170 C495 200 570 240 650 282" />
+
+                        <circle class="nucleus-halo" cx="430" cy="170" r="54" fill="rgba(56, 189, 248, 0.2)" />
+                        <circle class="nucleus-shell" cx="430" cy="170" r="37" fill="none" stroke="rgba(125, 211, 252, 0.65)" stroke-width="2.5" />
+                        <circle cx="430" cy="170" r="21" fill="#e2e8f0" opacity="0.92" />
+                        <circle cx="416" cy="164" r="4" fill="#38bdf8" />
+                        <circle cx="438" cy="160" r="4" fill="#f87171" />
+                        <circle cx="426" cy="180" r="4" fill="#38bdf8" />
+                        <circle cx="444" cy="178" r="4" fill="#f87171" />
+
+                        <circle class="interaction-flash" cx="365" cy="170" r="11" fill="rgba(250, 204, 21, 0.75)" />
+                        <path class="gamma-wave" d="M364 170 C378 153 392 187 406 170 C420 153 434 187 448 170" />
+                        <text class="interaction-label gamma-label" x="404" y="147" fill="#fde68a" font-size="15" font-family="JetBrains Mono, monospace">γ*</text>
+
+                        <g class="electron-group">
+                          <circle class="electron-particle" cx="80" cy="180" r="8.5" fill="#7dd3fc" />
+                          <text x="94" y="186" fill="#bae6fd" font-size="14" font-family="JetBrains Mono, monospace">e-</text>
+                        </g>
+
+                        <g class="proton-group">
+                          <circle class="proton-particle" cx="430" cy="170" r="8" fill="#f87171" />
+                          <text x="444" y="176" fill="#fecaca" font-size="14" font-family="JetBrains Mono, monospace">p</text>
+                        </g>
+
+                        <text class="interaction-label excited-label" x="468" y="161" fill="#cbd5e1" font-size="12" font-family="JetBrains Mono, monospace">excited nucleus</text>
+                        <text class="interaction-label deflected-label" x="644" y="76" fill="#93c5fd" font-size="12" font-family="JetBrains Mono, monospace">deflected electron</text>
+                        <text class="interaction-label emitted-label" x="618" y="306" fill="#fca5a5" font-size="12" font-family="JetBrains Mono, monospace">emitted proton</text>
+                      </svg>
+                    </div>
+
+                    <div class="qe-scene qe-scene-neutrino" aria-hidden="true">
+                      <span class="qe-scene-badge qe-scene-badge-neutrino"><span class="qe-scene-symbol">&nu;<sub>&mu;</sub></span>-CCQE analogue</span>
+                      <svg class="interaction-svg" viewBox="0 0 860 340" aria-hidden="true">
+                        <path class="interaction-track neutrino-in-track" d="M80 180 C170 180 280 178 365 170" />
+                        <path class="interaction-track muon-out-track" d="M365 170 C470 150 610 125 730 90" />
+                        <path class="interaction-track proton-track" d="M430 170 C495 200 570 240 650 282" />
+
+                        <circle class="nucleus-halo weak-nucleus-halo" cx="430" cy="170" r="54" />
+                        <circle class="nucleus-shell weak-nucleus-shell" cx="430" cy="170" r="37" fill="none" stroke-width="2.5" />
+                        <circle cx="430" cy="170" r="21" fill="#e2e8f0" opacity="0.92" />
+                        <circle cx="416" cy="164" r="4" fill="#38bdf8" />
+                        <circle cx="438" cy="160" r="4" fill="#f87171" />
+                        <circle cx="426" cy="180" r="4" fill="#38bdf8" />
+                        <circle cx="444" cy="178" r="4" fill="#f87171" />
+
+                        <circle class="interaction-flash weak-flash" cx="365" cy="170" r="11" fill="rgba(74, 222, 128, 0.72)" />
+                        <path class="weak-wave" d="M364 170 C378 153 392 187 406 170 C420 153 434 187 448 170" />
+                        <text class="interaction-label w-label" x="406" y="147" fill="#86efac" font-size="15" font-family="JetBrains Mono, monospace">W+</text>
+
+                        <g class="neutrino-group">
+                          <circle class="neutrino-particle" cx="80" cy="180" r="8.5" fill="#5eead4" />
+                          <text x="94" y="186" fill="#ccfbf1" font-size="14" font-family="JetBrains Mono, monospace">ν<tspan baseline-shift="sub" font-size="10">&mu;</tspan></text>
+                        </g>
+
+                        <g class="muon-group">
+                          <circle class="muon-particle" cx="365" cy="170" r="8.5" fill="#7dd3fc" />
+                          <text x="379" y="176" fill="#dbeafe" font-size="14" font-family="JetBrains Mono, monospace">μ-</text>
+                        </g>
+
+                        <g class="neutron-group">
+                          <circle class="neutron-particle" cx="430" cy="170" r="8" fill="#93c5fd" />
+                          <text class="neutron-inner-label" x="424" y="175" fill="#0f172a" font-size="14" font-family="JetBrains Mono, monospace">n</text>
+                        </g>
+
+                        <g class="proton-group">
+                          <circle class="proton-particle" cx="430" cy="170" r="8" fill="#f87171" />
+                          <text x="444" y="176" fill="#fecaca" font-size="14" font-family="JetBrains Mono, monospace">p</text>
+                        </g>
+
+                        <text class="interaction-label neutron-label" x="468" y="161" fill="#cbd5e1" font-size="12" font-family="JetBrains Mono, monospace">bound neutron</text>
+                        <text class="interaction-label muon-label" x="646" y="76" fill="#bfdbfe" font-size="12" font-family="JetBrains Mono, monospace">outgoing muon</text>
+                        <text class="interaction-label emitted-label" x="618" y="306" fill="#fca5a5" font-size="12" font-family="JetBrains Mono, monospace">emitted proton</text>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="interaction-copy">
+                  <article class="interaction-panel qe-copy-panel qe-copy-panel-electron">
+                    <h4 class="interaction-panel-title"><span class="interaction-index">eA</span>Electron QE</h4>
+                    <p>The incoming electron transfers momentum through the exchanged <span class="font-mono text-amber-200">γ*</span> to a bound proton. The outgoing topology is the familiar scattered electron plus knocked-out proton used to constrain the vector response of the nucleus.</p>
+                    <div class="interaction-chip-row">
+                      <span class="interaction-chip">Final state: e&apos; + p</span>
+                      <span class="interaction-chip">&gamma;* exchange</span>
+                      <span class="interaction-chip">Vector current</span>
+                    </div>
+                  </article>
+                  <article class="interaction-panel qe-copy-panel qe-copy-panel-neutrino">
+                    <h4 class="interaction-panel-title"><span class="interaction-index">&nu;<sub>&mu;</sub></span>Charged-current QE analogue</h4>
+                    <p>The incoming <span class="font-mono text-emerald-200">&nu;<sub>&mu;</sub></span> exchanges a <span class="font-mono text-emerald-200">W+</span> with a bound neutron, converting it into a proton and producing an outgoing muon. The lepton identity changes, but the single-nucleon knockout geometry remains closely parallel.</p>
+                    <div class="interaction-chip-row">
+                      <span class="interaction-chip">Final state: &mu;- + p</span>
+                      <span class="interaction-chip">W+ exchange</span>
+                      <span class="interaction-chip">Vector + axial currents</span>
+                    </div>
+                  </article>
+                </div>
+              </div>
+
+              <p class="text-sm md:text-base text-gray-300 mt-6 leading-relaxed border-l-2 border-accent/35 pl-4">
+                <span class="text-accent font-semibold">Why show both:</span> electron scattering isolates the electromagnetic vector response, while <span class="font-mono text-emerald-200">&nu;<sub>&mu;</sub></span> CCQE adds weak couplings and axial structure.
+              </p>
+            </div>
+          </section>
+
+          <section class="about-tab-panel" id="about-panel-fsi" data-about-tab-panel="fsi" role="tabpanel" aria-labelledby="about-tab-fsi" hidden>
+            <div class="interaction-card fsi-card rounded-3xl border border-white/10 p-6 md:p-10" data-fsi-card data-fsi-phase="distortion">
+              <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+                <div>
+                  <h3 class="text-2xl md:text-3xl font-semibold text-white tracking-tight">Final-State Interactions (FSI)</h3>
+                  <p class="text-gray-400 mt-2 max-w-3xl">The hard scattering is only the start. As hadrons propagate through the nucleus they can rescatter, exchange charge, or be absorbed before the detector ever sees them.</p>
+                </div>
+                <span class="inline-flex items-center self-start px-3 py-1 rounded-full text-xs font-mono tracking-wide text-rose-100 border border-rose-200/30 bg-rose-200/10">Transport through the nucleus</span>
+              </div>
+
+              <div class="fsi-controls mt-8" aria-label="Final-state interaction scenarios">
+                <button type="button" class="fsi-phase-button is-active" data-fsi-phase-button="distortion" aria-pressed="true" aria-controls="fsi-panel-distortion">a. Kinematic distortion</button>
+                <button type="button" class="fsi-phase-button" data-fsi-phase-button="exchange" aria-pressed="false" aria-controls="fsi-panel-exchange">b. Charge exchange</button>
+                <button type="button" class="fsi-phase-button" data-fsi-phase-button="absorption" aria-pressed="false" aria-controls="fsi-panel-absorption">c. Absorption + knockout</button>
+              </div>
+
+              <div class="fsi-grid mt-6">
+                <div class="fsi-stage rounded-3xl">
+                  <div class="fsi-stage-panel" data-fsi-stage-panel="distortion">
+                    <svg class="fsi-row-svg" viewBox="0 0 520 260" role="img" aria-label="A proton rescattering in the nucleus leaves as a proton but with changed momentum and angle">
+                      <circle class="fsi-medium-halo" cx="176" cy="130" r="104" />
+                      <circle class="fsi-medium-shell" cx="176" cy="130" r="78" />
+                      <circle cx="144" cy="112" r="6.3" fill="#38bdf8" />
+                      <circle cx="183" cy="100" r="6.3" fill="#f87171" />
+                      <circle cx="159" cy="145" r="6.3" fill="#f87171" />
+                      <circle cx="203" cy="138" r="6.3" fill="#38bdf8" />
+                      <circle cx="182" cy="176" r="6.3" fill="#f87171" />
+
+                      <path class="fsi-track-in" d="M110 132 C138 130 164 128 214 132" />
+                      <path class="fsi-track-guide" d="M214 132 C290 132 360 130 440 130" />
+                      <path class="fsi-track-soft" d="M214 132 C286 122 352 104 440 98" />
+                      <circle class="fsi-vertex-flash" cx="214" cy="132" r="10" />
+
+                      <g class="fsi-row1-primary">
+                        <circle class="fsi-particle-proton" cx="110" cy="132" r="8.6" />
+                        <text class="fsi-particle-label" x="124" y="138">p</text>
+                      </g>
+                      <g class="fsi-row1-out">
+                        <circle class="fsi-particle-proton" cx="214" cy="132" r="8.6" />
+                        <text class="fsi-particle-label" x="228" y="138">p</text>
+                      </g>
+
+                      <text class="fsi-stage-caption" x="95" y="236">nuclear medium</text>
+                      <text class="fsi-detector-caption" x="414" y="58">detector</text>
+                      <rect class="fsi-detector-box" x="406" y="72" width="72" height="120" rx="24" />
+                      <circle class="fsi-detector-hit fsi-hit-proton fsi-row1-hit" cx="442" cy="98" r="13" />
+                    </svg>
+                  </div>
+
+                  <div class="fsi-stage-panel" data-fsi-stage-panel="exchange" hidden>
+                    <svg class="fsi-row-svg" viewBox="0 0 520 260" role="img" aria-label="A proton undergoes charge exchange in the nucleus and exits as a neutron">
+                      <circle class="fsi-medium-halo" cx="176" cy="130" r="104" />
+                      <circle class="fsi-medium-shell" cx="176" cy="130" r="78" />
+                      <circle cx="144" cy="112" r="6.3" fill="#38bdf8" />
+                      <circle cx="183" cy="100" r="6.3" fill="#f87171" />
+                      <circle cx="159" cy="145" r="6.3" fill="#f87171" />
+                      <circle cx="203" cy="138" r="6.3" fill="#38bdf8" />
+                      <circle cx="182" cy="176" r="6.3" fill="#f87171" />
+
+                      <path class="fsi-track-in" d="M110 132 C138 130 164 128 214 132" />
+                      <path class="fsi-track-neutron-out" d="M214 132 C292 130 362 131 440 132" />
+                      <circle class="fsi-conversion-flash" cx="214" cy="132" r="10" />
+
+                      <g class="fsi-row2-primary">
+                        <circle class="fsi-particle-proton" cx="110" cy="132" r="8.6" />
+                        <text class="fsi-particle-label" x="124" y="138">p</text>
+                      </g>
+                      <g class="fsi-row2-out">
+                        <circle class="fsi-particle-neutron" cx="214" cy="132" r="8.6" />
+                        <text class="fsi-particle-label" x="228" y="138">n</text>
+                      </g>
+
+                      <text class="fsi-stage-caption" x="95" y="236">nuclear medium</text>
+                      <text class="fsi-detector-caption" x="414" y="58">detector</text>
+                      <rect class="fsi-detector-box" x="406" y="72" width="72" height="120" rx="24" />
+                      <circle class="fsi-detector-hit fsi-hit-neutron fsi-row2-hit" cx="442" cy="132" r="13" />
+                    </svg>
+                  </div>
+
+                  <div class="fsi-stage-panel" data-fsi-stage-panel="absorption" hidden>
+                    <svg class="fsi-row-svg" viewBox="0 0 520 260" role="img" aria-label="A pion produced inside the nucleus is absorbed before escape and its energy is redistributed to two outgoing nucleons">
+                      <circle class="fsi-medium-halo" cx="176" cy="130" r="104" />
+                      <circle class="fsi-medium-shell" cx="176" cy="130" r="78" />
+                      <circle cx="144" cy="112" r="6.3" fill="#38bdf8" />
+                      <circle cx="183" cy="100" r="6.3" fill="#f87171" />
+                      <circle cx="159" cy="145" r="6.3" fill="#f87171" />
+                      <circle cx="203" cy="138" r="6.3" fill="#38bdf8" />
+                      <circle cx="182" cy="176" r="6.3" fill="#f87171" />
+
+                      <circle class="fsi-production-flash" cx="174" cy="130" r="9" />
+                      <path class="fsi-track-pion" d="M174 130 C192 136 210 148 232 164" />
+                      <circle class="fsi-absorption-flash" cx="232" cy="164" r="11" />
+                      <path class="fsi-track-knockout-a" d="M232 164 C294 148 356 122 440 104" />
+                      <path class="fsi-track-knockout-b" d="M232 164 C294 178 356 188 440 164" />
+
+                      <g class="fsi-row3-pion">
+                        <circle class="fsi-particle-pion" cx="174" cy="130" r="8.2" />
+                        <text class="fsi-particle-label" x="188" y="136">π</text>
+                      </g>
+                      <g class="fsi-row3-knockout-a">
+                        <circle class="fsi-particle-proton" cx="232" cy="164" r="8.4" />
+                        <text class="fsi-particle-label" x="246" y="170">p</text>
+                      </g>
+                      <g class="fsi-row3-knockout-b">
+                        <circle class="fsi-particle-neutron" cx="232" cy="164" r="8.4" />
+                        <text class="fsi-particle-label" x="246" y="170">n</text>
+                      </g>
+
+                      <text class="fsi-stage-caption" x="95" y="236">nuclear medium</text>
+                      <text class="fsi-detector-caption" x="414" y="58">detector</text>
+                      <rect class="fsi-detector-box" x="406" y="64" width="72" height="128" rx="24" />
+                      <circle class="fsi-detector-hit fsi-hit-proton fsi-row3-hit-a" cx="442" cy="104" r="12.5" />
+                      <circle class="fsi-detector-hit fsi-hit-neutron fsi-row3-hit-b" cx="442" cy="164" r="12.5" />
+                    </svg>
+                  </div>
+                </div>
+
+                <div class="fsi-copy">
+                  <article class="fsi-panel" id="fsi-panel-distortion" data-fsi-panel="distortion">
+                    <h4 class="fsi-copy-title"><span class="fsi-index">a.</span>Kinematic distortion</h4>
+                    <p>Rescattering can leave the outgoing proton as a proton, but with lower momentum and a different exit angle. The event can still look <span class="font-mono text-accent">1p</span>-like even though the measured kinematics no longer match the primary interaction vertex.</p>
+                    <div class="fsi-chip-row">
+                      <span class="fsi-chip">Detected: p</span>
+                      <span class="fsi-chip">Identity preserved</span>
+                      <span class="fsi-chip">Momentum and angle shifted</span>
+                    </div>
+                  </article>
+
+                  <article class="fsi-panel" id="fsi-panel-exchange" data-fsi-panel="exchange" hidden>
+                    <h4 class="fsi-copy-title"><span class="fsi-index">b.</span>Charge exchange</h4>
+                    <p>A hadron can swap charge while it propagates through the medium. In this example the struck proton leaves as a neutron, so the particle species seen by the detector no longer matches the species produced at the primary vertex.</p>
+                    <div class="fsi-chip-row">
+                      <span class="fsi-chip">Primary hadron: p</span>
+                      <span class="fsi-chip">Detected: n</span>
+                      <span class="fsi-chip">Species changed by FSI</span>
+                    </div>
+                  </article>
+
+                  <article class="fsi-panel" id="fsi-panel-absorption" data-fsi-panel="absorption" hidden>
+                    <h4 class="fsi-copy-title"><span class="fsi-index">c.</span>Absorption plus knockout</h4>
+                    <p>A pion produced at the primary interaction can be absorbed on nearby nucleons before it escapes the nucleus. Its energy is then redistributed to those nucleons, which can emerge as extra knocked-out particles, so the detector sees additional nucleons and no outgoing pion.</p>
+                    <div class="fsi-chip-row">
+                      <span class="fsi-chip">Produced in medium: π</span>
+                      <span class="fsi-chip">Detected: p + n</span>
+                      <span class="fsi-chip">Absorbed before escape</span>
+                    </div>
+                  </article>
+                </div>
+              </div>
+
+              <p class="text-sm md:text-base text-gray-300 mt-6 leading-relaxed border-l-2 border-rose-200/25 pl-4">
+                <span class="text-rose-100 font-semibold">Detector consequence:</span> the measured final state is a transported final state, not a pristine snapshot of the primary vertex. Topology, multiplicity, and reconstructed kinematics all depend on intranuclear transport.
+              </p>
+            </div>
+          </section>
+
+          <section class="about-tab-panel" id="about-panel-mec" data-about-tab-panel="mec" role="tabpanel" aria-labelledby="about-tab-mec" hidden>
+            <div class="interaction-card mec-card rounded-3xl border border-white/10 p-6 md:p-10" data-mec-phase="pair">
+          <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+            <div>
+              <h3 class="text-2xl md:text-3xl font-semibold text-white tracking-tight">2p2h / MEC</h3>
+              <p class="text-gray-400 mt-2 max-w-3xl">A stylized multinucleon interaction: the exchanged virtual photon couples to a shared two-body current inside the nucleus, and the transferred momentum can knock out two nucleons instead of one.</p>
+            </div>
+            <div class="flex flex-wrap gap-2 text-xs font-mono tracking-wide">
+              <span class="inline-flex items-center px-3 py-1 rounded-full text-emerald-100 border border-emerald-200/30 bg-emerald-200/10">2 particles + 2 holes</span>
+              <span class="inline-flex items-center px-3 py-1 rounded-full text-amber-100 border border-amber-200/30 bg-amber-200/10">MEC is one mechanism</span>
+            </div>
+          </div>
+
+          <div class="mec-controls mt-8" aria-label="2p2h / MEC interaction phases">
+            <button type="button" class="mec-phase-button is-active" data-mec-phase-button="pair" aria-pressed="true">1. Pair in nucleus</button>
+            <button type="button" class="mec-phase-button" data-mec-phase-button="exchange" aria-pressed="false">2. Shared current</button>
+            <button type="button" class="mec-phase-button" data-mec-phase-button="knockout" aria-pressed="false">3. Two-nucleon knockout</button>
+          </div>
+
+          <div class="mec-grid mt-6">
+            <div class="mec-stage rounded-3xl">
+              <canvas class="mec-canvas" role="img" aria-label="Electron scattering from a shared two-body current inside the nucleus ejects two nucleons"></canvas>
+            </div>
+
+            <div class="mec-copy">
+              <article class="mec-panel">
+                <h4 class="mec-panel-title"><span class="mec-index">MEC</span>Shared current to two-nucleon knockout</h4>
+                <p>A correlated nucleon pair in the nucleus can absorb the exchanged <span class="font-mono text-amber-200">γ*</span> through a shared two-body current, so the transferred momentum is distributed across the pair rather than deposited on one isolated nucleon.</p>
+                <p class="mt-4">As the interaction develops, both nucleons can be ejected and the residual system is left with two holes. That 2p2h topology is one reason multinucleon dynamics matter for neutrino-energy reconstruction and detector-level event classification.</p>
+                <div class="mec-chip-row">
+                  <span class="mec-chip">Illustration: p + n pair</span>
+                  <span class="mec-chip">Two-body current</span>
+                  <span class="mec-chip">2 nucleons ejected</span>
+                  <span class="mec-chip">2 holes in residual nucleus</span>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <p class="text-sm md:text-base text-gray-300 mt-6 leading-relaxed border-l-2 border-emerald-200/25 pl-4">
+            <span class="text-emerald-100 font-semibold">Terminology note:</span> <span class="font-mono text-emerald-200">2p2h</span> names the final state, while <span class="font-mono text-amber-200">MEC</span> names one mechanism that can produce it. Correlations, interference terms, and later FSI can overlap with the same detector topology.
+          </p>
+            </div>
+          </section>
+
+          <section class="about-tab-panel" id="about-panel-res" data-about-tab-panel="res" role="tabpanel" aria-labelledby="about-tab-res" hidden>
+            <div class="interaction-card res-card rounded-3xl border border-white/10 p-6 md:p-10" data-res-phase="approach">
+          <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+            <div>
+              <h3 class="text-2xl md:text-3xl font-semibold text-white tracking-tight">Resonant Pion Production (RES)</h3>
+              <p class="text-gray-400 mt-2 max-w-3xl">A stylized resonance interaction: the exchanged virtual photon excites the struck proton to the &Delta;(1232) baryon resonance, which decays almost instantly into a nucleon and a pion.</p>
+            </div>
+            <div class="flex flex-wrap gap-2 text-xs font-mono tracking-wide">
+              <span class="inline-flex items-center px-3 py-1 rounded-full text-purple-100 border border-purple-200/30 bg-purple-200/10">&Delta;(1232) resonance</span>
+              <span class="inline-flex items-center px-3 py-1 rounded-full text-amber-100 border border-amber-200/30 bg-amber-200/10">dominant inelastic channel</span>
+            </div>
+          </div>
+
+          <div class="res-controls mt-8" aria-label="RES interaction phases">
+            <button type="button" class="res-phase-button is-active" data-res-phase-button="approach" aria-pressed="true">1. Electron approaches</button>
+            <button type="button" class="res-phase-button" data-res-phase-button="resonance" aria-pressed="false">2. Resonance excitation</button>
+            <button type="button" class="res-phase-button" data-res-phase-button="decay" aria-pressed="false">3. Resonance decay</button>
+          </div>
+
+          <div class="res-grid mt-6">
+            <div class="res-stage rounded-3xl">
+              <canvas class="res-canvas" role="img" aria-label="Electron excites a proton to the Delta(1232) resonance, which decays to a neutron and pion"></canvas>
+            </div>
+
+            <div class="res-copy">
+              <article class="res-panel">
+                <h4 class="res-panel-title"><span class="res-index">RES</span>&Delta;(1232) excitation and decay</h4>
+                <p>An incoming electron transfers enough energy to push a bound proton out of the quasielastic region and into the resonance spectrum. In this stylized example, the exchanged <span class="font-mono text-amber-200">&gamma;*</span> excites the proton to the <span class="font-mono text-amber-200">&Delta;&#x207A;(1232)</span>, the dominant low-lying baryon resonance.</p>
+                <p class="mt-4">That resonance is short-lived and decays through the strong interaction into a neutron and a <span class="font-mono text-purple-200">&pi;&#x207A;</span>. The detector therefore sees an inelastic final state with three outgoing particles while the residual nucleus is left with one hole.</p>
+                <div class="res-chip-row">
+                  <span class="res-chip">Target: proton in nucleus</span>
+                  <span class="res-chip">&Delta;(1232) resonance</span>
+                  <span class="res-chip">Decay: n + &pi;<sup>+</sup></span>
+                  <span class="res-chip">1 hole in residual nucleus</span>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <p class="text-sm md:text-base text-gray-300 mt-6 leading-relaxed border-l-2 border-purple-200/25 pl-4">
+            <span class="text-purple-100 font-semibold">Note:</span> RES is the dominant inelastic channel in the few-GeV region. Final-state interactions can absorb, scatter, or charge-exchange the pion before it escapes the nucleus, altering the detected topology.
+          </p>
+            </div>
+          </section>
+
+          <section class="about-tab-panel" id="about-panel-dis" data-about-tab-panel="dis" role="tabpanel" aria-labelledby="about-tab-dis" hidden>
+            <div class="interaction-card dis-card rounded-3xl border border-white/10 p-6 md:p-10" data-dis-phase="approach">
+          <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+            <div>
+              <h3 class="text-2xl md:text-3xl font-semibold text-white tracking-tight">Deep Inelastic Scattering (DIS)</h3>
+              <p class="text-gray-400 mt-2 max-w-3xl">At high Q&sup2; the virtual photon resolves the quark substructure of the nucleon, strikes a single quark, and a color string stretches back to the remnant diquark before fragmenting into hadrons.</p>
+            </div>
+            <div class="flex flex-wrap gap-2 text-xs font-mono tracking-wide">
+              <span class="inline-flex items-center px-3 py-1 rounded-full text-cyan-100 border border-cyan-200/30 bg-cyan-200/10">W&sup2; &gt; 4 GeV&sup2;</span>
+              <span class="inline-flex items-center px-3 py-1 rounded-full text-teal-100 border border-teal-200/30 bg-teal-200/10">hadronization</span>
+            </div>
+          </div>
+
+          <div class="dis-controls mt-8" aria-label="DIS interaction phases">
+            <button type="button" class="dis-phase-button is-active" data-dis-phase-button="approach" aria-pressed="true">1. Quark substructure</button>
+            <button type="button" class="dis-phase-button" data-dis-phase-button="scatter" aria-pressed="false">2. Hard scatter</button>
+            <button type="button" class="dis-phase-button" data-dis-phase-button="hadronize" aria-pressed="false">3. Hadronization</button>
+          </div>
+
+          <div class="dis-grid mt-6">
+            <div class="dis-stage rounded-3xl">
+              <canvas class="dis-canvas" role="img" aria-label="Deep inelastic scattering: virtual photon strikes a quark, a color string stretches to the remnant diquark, and hadrons form from string breaks"></canvas>
+            </div>
+
+            <div class="dis-copy">
+              <article class="dis-panel">
+                <h4 class="dis-panel-title"><span class="dis-index">DIS</span>Hard scatter to hadronization</h4>
+                <p>At high Q<sup>2</sup>, the virtual photon resolves the nucleon into quarks and strikes one parton directly. The outgoing quark separates from the colored remnant diquark, a short parton shower develops, and a color flux tube stretches between the two ends of the system.</p>
+                <p class="mt-4">As that string elongates it breaks through q<span style="text-decoration:overline">q</span> pair creation, producing a hadronic spray along the jet direction plus a remnant-side baryon. The residual nucleus is again left with one hole, and later FSI can still reshape the observed final state.</p>
+                <div class="dis-chip-row">
+                  <span class="dis-chip">3 valence quarks</span>
+                  <span class="dis-chip">Struck quark + remnant diquark</span>
+                  <span class="dis-chip">String breaking</span>
+                  <span class="dis-chip">Jet hadrons + remnant baryon</span>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <p class="text-sm md:text-base text-gray-300 mt-6 leading-relaxed border-l-2 border-cyan-200/25 pl-4">
+            <span class="text-cyan-100 font-semibold">Note:</span> DIS dominates at W&sup2;&nbsp;&gt;&nbsp;4&nbsp;GeV&sup2;. Final-state interactions can modify the hadron jet before particles escape the nucleus, altering both multiplicities and kinematics.
+          </p>
+            </div>
+          </section>
+
+          <section class="about-tab-panel" id="about-panel-cvc" data-about-tab-panel="cvc" role="tabpanel" aria-labelledby="about-tab-cvc" hidden>
+            <div class="interaction-card cvc-card rounded-3xl border border-white/10 p-6 md:p-10">
+              <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+                <div>
+                  <h3 class="text-2xl md:text-3xl font-semibold text-white tracking-tight">Conserved Vector Current (CVC)</h3>
+                  <p class="text-gray-400 mt-2 max-w-3xl">Electron scattering constrains the vector hadronic ingredients. CVC identifies the isovector electromagnetic current with the charged weak vector current used in neutrino-nucleus predictions.</p>
+                </div>
+                <span class="cvc-badge">Why e4nu works</span>
+              </div>
+
+              <div class="interaction-phase-list cvc-phase-list mt-8" aria-label="CVC bridge phases">
+                <div class="interaction-phase-chip"><span class="interaction-phase-index">1.</span>Measure EM vector input</div>
+                <div class="interaction-phase-chip"><span class="interaction-phase-index">2.</span>Keep the isovector piece</div>
+                <div class="interaction-phase-chip"><span class="interaction-phase-index">3.</span>Rotate into weak CC and add axial</div>
+              </div>
+
+              <div class="cvc-board mt-8" role="img" aria-label="Three-stage CVC bridge: electron scattering measures the electromagnetic vector response, the isovector current is isolated by CVC, and that vector input is carried into the weak charged-current calculation while axial terms remain separate">
+                <div class="cvc-flow-beam" aria-hidden="true">
+                  <span class="cvc-flow-track"></span>
+                  <span class="cvc-flow-pulse"></span>
+                </div>
+
+                <div class="cvc-board-grid">
+                  <article class="cvc-system cvc-system-measure">
+                    <p class="cvc-system-kicker">Step 1</p>
+                    <h4 class="cvc-system-title">Measure the electromagnetic response</h4>
+                    <p class="cvc-system-text">Electron scattering locks down vector form factors and response functions directly from data.</p>
+
+                    <div class="cvc-monitor cvc-monitor-measure" aria-hidden="true">
+                      <div class="cvc-measure-graphic">
+                        <div class="cvc-measure-channel">
+                          <div class="cvc-track-line cvc-track-line-in">
+                            <span class="cvc-dot cvc-dot-electron"></span>
+                          </div>
+                          <div class="cvc-track-line cvc-track-line-out">
+                            <span class="cvc-dot cvc-dot-electron-out"></span>
+                          </div>
+                          <div class="cvc-burst cvc-burst-em"></div>
+                          <div class="cvc-nucleus cvc-nucleus-measure">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                          </div>
+                          <div class="cvc-monitor-note cvc-monitor-note-top">eA probe</div>
+                          <div class="cvc-monitor-note cvc-monitor-note-bottom">vector response pinned down</div>
+                        </div>
+
+                        <div class="cvc-spectrum">
+                          <span class="cvc-spectrum-bar"></span>
+                          <span class="cvc-spectrum-bar"></span>
+                          <span class="cvc-spectrum-bar"></span>
+                          <span class="cvc-spectrum-bar"></span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="cvc-meta-list">
+                      <span class="cvc-meta-chip">eA observables</span>
+                      <span class="cvc-meta-chip">VV sector</span>
+                      <span class="cvc-meta-chip">Model validation</span>
+                    </div>
+                  </article>
+
+                  <div class="cvc-bridge-column">
+                    <div class="cvc-bridge-panel">
+                      <p class="cvc-system-kicker">Step 2</p>
+                      <h4 class="cvc-system-title">Keep only the transferable current</h4>
+                      <p class="cvc-system-text">CVC connects the charged weak vector current to the isovector part of the electromagnetic current, not to the full EM response.</p>
+
+                      <div class="cvc-decomposition" aria-hidden="true">
+                        <div class="cvc-current-pill cvc-current-pill-em">J<sub>EM</sub><sup>&mu;</sup></div>
+                        <div class="cvc-current-branches">
+                          <div class="cvc-current-branch cvc-current-branch-muted">
+                            <span class="cvc-branch-name">Isoscalar</span>
+                            <span class="cvc-branch-note">drops out of CC</span>
+                          </div>
+                          <div class="cvc-current-branch cvc-current-branch-live">
+                            <span class="cvc-branch-name">Isovector</span>
+                            <span class="cvc-branch-note">transported by CVC</span>
+                          </div>
+                        </div>
+                        <div class="cvc-transfer-arrow">
+                          <span class="cvc-transfer-label">CVC isospin rotation</span>
+                          <span class="cvc-transfer-pulse"></span>
+                        </div>
+                        <div class="cvc-current-pill cvc-current-pill-weak">J<sub>V,+</sub><sup>&mu;</sup></div>
+                      </div>
+                    </div>
+
+                    <div class="cvc-bridge-note">
+                      <span class="cvc-bridge-note-label">Transfer rule</span>
+                      <strong class="cvc-bridge-note-strong">Carry the vector structure across, then rebuild the weak process with weak couplings and kinematics.</strong>
+                    </div>
+                  </div>
+
+                  <article class="cvc-system cvc-system-predict">
+                    <p class="cvc-system-kicker">Step 3</p>
+                    <h4 class="cvc-system-title">Recompute the weak interaction</h4>
+                    <p class="cvc-system-text">The vector piece comes from eA constraints, while axial and VA terms remain separate ingredients in the neutrino calculation.</p>
+
+                    <div class="cvc-monitor cvc-monitor-predict" aria-hidden="true">
+                      <div class="cvc-predict-graphic">
+                        <div class="cvc-predict-channel">
+                          <div class="cvc-track-line cvc-track-line-weak-in">
+                            <span class="cvc-dot cvc-dot-neutrino"></span>
+                          </div>
+                          <div class="cvc-track-line cvc-track-line-lepton">
+                            <span class="cvc-product-label cvc-product-label-lepton">l-</span>
+                          </div>
+                          <div class="cvc-track-line cvc-track-line-proton">
+                            <span class="cvc-product-label cvc-product-label-proton">p</span>
+                          </div>
+                          <div class="cvc-burst cvc-burst-weak"></div>
+                          <div class="cvc-nucleus cvc-nucleus-predict">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                          </div>
+                          <div class="cvc-monitor-note cvc-monitor-note-top">weak CC event</div>
+                          <div class="cvc-monitor-note cvc-monitor-note-bottom">vector reused, axial separate</div>
+                        </div>
+
+                        <div class="cvc-module-stack">
+                          <div class="cvc-module cvc-module-vector">
+                            <span class="cvc-module-label">vector</span>
+                            <span class="cvc-module-copy">Imported from eA through CVC</span>
+                          </div>
+                          <div class="cvc-module cvc-module-axial">
+                            <span class="cvc-module-label">axial</span>
+                            <span class="cvc-module-copy">Added from neutrino data and theory</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="cvc-meta-list">
+                      <span class="cvc-meta-chip">Weak couplings</span>
+                      <span class="cvc-meta-chip">Axial remains separate</span>
+                      <span class="cvc-meta-chip">QE to DIS</span>
+                    </div>
+                  </article>
+                </div>
+              </div>
+
+              <div class="cvc-equation-strip mt-6" aria-label="Compact CVC equations">
+                <article class="cvc-equation-card">
+                  <p class="cvc-equation-kicker">Decompose</p>
+                  <div class="cvc-equation">J<sub>EM</sub><sup>&mu;</sup> = J<sub>S</sub><sup>&mu;</sup> + J<sub>3</sub><sup>&mu;</sup></div>
+                  <p class="cvc-equation-caption">Separate the electromagnetic current into isoscalar and isovector pieces.</p>
+                </article>
+                <article class="cvc-equation-card">
+                  <p class="cvc-equation-kicker">Rotate</p>
+                  <div class="cvc-equation">J<sub>V,&plusmn;</sub><sup>&mu;</sup> = J<sub>1</sub><sup>&mu;</sup> &plusmn; iJ<sub>2</sub><sup>&mu;</sup></div>
+                  <p class="cvc-equation-caption">CVC links the weak charged vector current to the isovector isospin triplet.</p>
+                </article>
+                <article class="cvc-equation-card">
+                  <p class="cvc-equation-kicker">Reuse</p>
+                  <div class="cvc-equation">F<sub>i</sub><sup>V</sup> = F<sub>i</sub><sup>p</sup> - F<sub>i</sub><sup>n</sup></div>
+                  <p class="cvc-equation-caption">Neutrino calculations inherit vector nucleon structure through the proton-neutron difference.</p>
+                </article>
+              </div>
+
+              <div class="interaction-copy cvc-copy mt-6">
+                <article class="interaction-panel cvc-panel">
+                  <h4 class="interaction-panel-title"><span class="interaction-index">CVC</span>Vector input from eA to weak CC</h4>
+                  <p>Electron scattering does not hand over a finished neutrino cross section. It constrains the vector hadronic ingredients, and CVC tells us exactly which part of that information can be promoted into the charged weak vector current.</p>
+                  <p class="mt-4">Once that vector sector is transported, the neutrino calculation is rebuilt with weak couplings, weak kinematics, and separate axial or VA terms. The logic applies beyond QE to MEC, RES, DIS, and broader nuclear-response modeling.</p>
+                  <div class="interaction-chip-row">
+                    <span class="interaction-chip">Constrains the VV sector</span>
+                    <span class="interaction-chip">Isovector current only</span>
+                    <span class="interaction-chip">Axial and VA remain separate</span>
+                    <span class="interaction-chip">Applies beyond QE</span>
+                  </div>
+                </article>
+              </div>
+
+              <p class="cvc-callout text-sm md:text-base text-gray-300 mt-6 leading-relaxed border-l-2 border-orange-200/25 pl-4">
+                <span class="text-orange-100 font-semibold">Not a cross-section rescaling:</span> electron data constrain the vector hadronic ingredients; the neutrino prediction is recomputed with weak couplings, kinematics, the weak leptonic tensor, and separate axial or VA pieces.
+              </p>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLAS12 Section -->
+  <section id="clas12" class="relative py-32 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="reveal grid lg:grid-cols-[0.92fr,1.08fr] gap-14 xl:gap-16 items-center">
+        <div>
+          <span class="text-accent font-mono text-sm tracking-widest uppercase mb-4 block">CLAS12 at Jefferson Lab</span>
+          <h2 class="text-4xl md:text-5xl font-bold text-white mb-8 leading-tight">
+            CLAS12 and the Hall B Data Program
+          </h2>
+          <div class="w-16 h-1 bg-accent/50 rounded-full mb-8"></div>
+          <div class="space-y-6 text-gray-400 leading-relaxed">
+            <p>
+              CLAS12, the CEBAF Large Acceptance Spectrometer for 12 GeV in Hall B at Jefferson Lab, is the modern large-acceptance detector system built for the lab&apos;s 12 GeV era. Its Forward Detector and Central Detector together reconstruct the scattered electron and the produced hadronic final state over broad angular coverage.
+            </p>
+            <p>
+              For e4nu, that coverage is what makes Hall B so useful: it lets us study electron-nucleus reactions on the same kinds of targets that matter for neutrino physics, then use those measurements to test nuclear-response calculations, benchmark generator ingredients, and understand biases in neutrino-energy reconstruction.
+            </p>
+            <p>
+              Our studies span beam settings of roughly 2, 4, and 6 GeV. While CLAS12 defines the upgraded Hall B program, many of our current analyses still rely on legacy CLAS6 data sets from the original CLAS detector, with CLAS12 providing the path to higher-rate and higher-energy follow-up measurements.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-2 mt-8" aria-label="CLAS12 highlights">
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-mono tracking-wide text-cyan-100 border border-cyan-200/30 bg-cyan-200/10">Hall B at Jefferson Lab</span>
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-mono tracking-wide text-cyan-100 border border-cyan-200/30 bg-cyan-200/10">Forward + Central detector coverage</span>
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-mono tracking-wide text-cyan-100 border border-cyan-200/30 bg-cyan-200/10">Studies at about 2, 4, and 6 GeV</span>
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-mono tracking-wide text-emerald-100 border border-emerald-200/30 bg-emerald-200/10">CLAS12 + legacy CLAS6 data</span>
+          </div>
+          <p class="text-accent/80 font-medium italic border-l-2 border-accent/30 pl-4 mt-8">
+            In practice, many current e4nu studies still use legacy CLAS6 data, while CLAS12 anchors the broader Hall B program and future measurements.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a
+              href="https://www.jlab.org/physics/hall-b/clas"
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center gap-3 px-6 py-3 border border-accent/30 thttps://pabce.github.io/e4nuweb/ext-accent rounded-full hover:bg-accent/10 transition-all"
+            >
+              Visit the CLAS/CLAS12 experiment page
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M17 7H9M17 7v8"/>
+              </svg>
+            </a>
+
+          </div>
+        </div>
+
+        <div class="relative">
+          <div class="rounded-3xl border border-white/10 bg-white/[0.03] p-4 md:p-5 overflow-hidden shadow-[0_26px_70px_rgba(2,6,23,0.32)]">
+            <div class="relative rounded-[1.7rem] border border-white/10 bg-[#061122] overflow-hidden min-h-[24rem] md:min-h-[30rem]">
+              <div class="absolute inset-0 opacity-20" aria-hidden="true" style="background-image: linear-gradient(rgba(125, 211, 252, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(125, 211, 252, 0.08) 1px, transparent 1px); background-size: 2.75rem 2.75rem;"></div>
+              <div class="absolute left-[10%] top-[16%] h-44 w-44 rounded-full bg-accent/25 blur-3xl" aria-hidden="true"></div>
+              <div class="absolute right-[12%] top-[12%] h-32 w-32 rounded-full bg-emerald-300/20 blur-3xl" aria-hidden="true"></div>
+              <div class="absolute left-[30%] bottom-[14%] h-32 w-32 rounded-full bg-cyan-300/15 blur-3xl" aria-hidden="true"></div>
+              <div class="absolute inset-x-0 top-1/2 h-px bg-gradient-to-r from-cyan-300/0 via-cyan-300/55 to-cyan-300/0" aria-hidden="true"></div>
+              <div class="absolute left-5 top-5 z-20 inline-flex items-center rounded-full border border-cyan-200/20 bg-navy/75 px-3 py-1.5 text-[11px] font-mono uppercase tracking-[0.2em] text-cyan-100" aria-hidden="true">
+                The CLAS12 Detector System
+              </div>
+              <div class="relative z-0 flex items-center justify-center h-full px-4 pt-16 pb-6 md:px-6 md:pt-20 md:pb-8">
+                <picture class="block w-full">
+                  <source srcset="assets/images/clas12diagram_transparent.webp" type="image/webp">
+                  <img
+                    src="assets/images/clas12diagram_transparent.png"
+                    alt="Annotated CLAS12 detector diagram at Jefferson Lab"
+                    loading="lazy"
+                    decoding="async"
+                    class="block w-full max-w-full h-auto max-h-[20rem] md:max-h-[26rem] object-contain object-center drop-shadow-[0_0_28px_rgba(56,189,248,0.18)]"
+                  >
+                </picture>
+              </div>
+            </div>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-3 mt-4">
+            <div class="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3">
+              <p class="text-[0.68rem] font-mono uppercase tracking-[0.18em] text-cyan-200/80">Forward Detector</p>
+              <p class="mt-1 text-sm text-gray-400">Captures the higher-energy charged and neutral particles emerging at small polar angles.</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3">
+              <p class="text-[0.68rem] font-mono uppercase tracking-[0.18em] text-emerald-200/80">Central Detector</p>
+              <p class="mt-1 text-sm text-gray-400">Tracks the target-region final state and extends the event reconstruction to larger angles.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Photos Section -->
+  <section id="photos" class="relative py-32 px-6 bg-deepblue/30">
+    <div class="max-w-6xl mx-auto">
+      <div class="reveal text-center mb-14">
+        <span class="text-accent font-mono text-sm tracking-widest uppercase mb-4 block">Collaboration Life</span>
+        <h2 class="text-4xl md:text-5xl font-bold text-white">Photo Carousel</h2>
+        <p class="text-gray-400 mt-4 max-w-2xl mx-auto">
+          Highlights from collaboration meetings, workshops, and shared milestones.
+        </p>
+      </div>
+      <div class="reveal">
+        <div
+          class="photo-carousel relative mx-auto max-w-5xl rounded-3xl overflow-hidden border border-white/10 bg-white/[0.03]"
+          data-carousel-root
+        >
+          <p
+            class="absolute left-6 top-6 z-10 rounded-full border border-white/10 bg-navy/70 px-4 py-2 text-sm text-gray-300"
+            data-carousel-status
+          >
+            Loading carousel...
+          </p>
+          <div class="photo-track flex transition-transform duration-700 ease-out" data-carousel-track></div>
+          <button type="button" class="carousel-control absolute top-1/2 left-4 -translate-y-1/2 z-10 flex items-center justify-center" data-carousel-prev aria-label="Show previous photo">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M15.75 19.5L8.25 12l7.5-7.5"/>
+            </svg>
+          </button>
+          <button type="button" class="carousel-control absolute top-1/2 right-4 -translate-y-1/2 z-10 flex items-center justify-center" data-carousel-next aria-label="Show next photo">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M8.25 4.5l7.5 7.5-7.5 7.5"/>
+            </svg>
+          </button>
+
+          <div class="absolute bottom-20 sm:bottom-[4.6rem] left-1/2 -translate-x-1/2 z-10 flex items-center gap-2" data-carousel-dots></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section id="team" class="relative py-32 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="reveal text-center mb-20">
+        <span class="text-accent font-mono text-sm tracking-widest uppercase mb-4 block">Our People</span>
+        <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">The Team</h2>
+        <p class="text-gray-400 max-w-xl mx-auto">Physicists from around the world using precision electron scattering to better understand the nuclear physics behind neutrino interactions.</p>
+      </div>
+
+      <div class="reveal grid md:grid-cols-2 gap-6">
+
+        <!-- Tel Aviv University -->
+        <div class="p-8 rounded-2xl bg-white/[0.03] border border-white/5 card-hover">
+          <a href="https://www.tau.ac.il/" target="_blank" rel="noopener" class="flex items-center gap-5 mb-6 group/logo">
+            <picture>
+              <source srcset="assets/logos/tau.webp" type="image/webp">
+              <img src="assets/logos/tau.png" alt="Tel Aviv University" loading="lazy" decoding="async" class="h-16 w-auto brightness-0 invert opacity-80 group-hover/logo:opacity-100 transition-opacity">
+            </picture>
+            <div>
+              <h3 class="text-lg font-semibold text-white group-hover/logo:text-accent transition-colors">Tel Aviv University</h3>
+              <span class="text-xs font-mono text-accent/60 tracking-wider">ISRAEL</span>
+            </div>
+          </a>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-2.5">
+            <a href="https://inspirehep.net/authors/1209359" target="_blank" rel="noopener" class="member-link">Adi Ashkenazi</a>
+            <a href="https://inspirehep.net/authors/2060216" target="_blank" rel="noopener" class="member-link">Pablo Barham Alzas</a>
+            <a href="https://inspirehep.net/search?q=a%20Brittany%20Cohen%20AND%20collaboration%20e4nu" target="_blank" rel="noopener" class="member-link">Brittany Cohen</a>
+            <a href="https://inspirehep.net/authors/1889280" target="_blank" rel="noopener" class="member-link">Ayala Glick-Magid</a>
+            <a href="https://inspirehep.net/authors/2099495" target="_blank" rel="noopener" class="member-link">Matan Goldenberg</a>
+            <a href="https://inspirehep.net/authors/2099497" target="_blank" rel="noopener" class="member-link">Alon Sportes</a>
+          </div>
+        </div>
+
+        <!-- Jefferson Lab -->
+        <div class="p-8 rounded-2xl bg-white/[0.03] border border-white/5 card-hover">
+          <a href="https://www.jlab.org/" target="_blank" rel="noopener" class="flex items-center gap-5 mb-6 group/logo">
+            <picture>
+              <source srcset="assets/logos/jlab.webp" type="image/webp">
+              <img src="assets/logos/jlab.png" alt="Jefferson Lab" loading="lazy" decoding="async" class="h-16 w-auto opacity-90 drop-shadow-[0_0_5px_rgba(255,255,255,0.9)] group-hover/logo:opacity-100 transition-opacity">
+            </picture>
+            <div>
+              <h3 class="text-lg font-semibold text-white group-hover/logo:text-accent transition-colors">Jefferson Lab</h3>
+              <span class="text-xs font-mono text-accent/60 tracking-wider">USA</span>
+            </div>
+          </a>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-2.5">
+            <a href="https://inspirehep.net/authors/1013560" target="_blank" rel="noopener" class="member-link">Eric Christy</a>
+            <a href="https://inspirehep.net/authors/1259729" target="_blank" rel="noopener" class="member-link">Florian Hauenstein</a>
+          </div>
+        </div>
+
+        <!-- Old Dominion University -->
+        <div class="p-8 rounded-2xl bg-white/[0.03] border border-white/5 card-hover">
+          <a href="https://www.odu.edu/" target="_blank" rel="noopener" class="flex items-center gap-5 mb-6 group/logo">
+            <picture>
+              <source srcset="assets/logos/odu2.webp" type="image/webp">
+              <img src="assets/logos/odu2.png" alt="Old Dominion University" loading="lazy" decoding="async" class="h-14 w-auto brightness-0 invert opacity-90 group-hover/logo:opacity-100 transition-opacity">
+            </picture>
+            <div>
+              <h3 class="text-lg font-semibold text-white group-hover/logo:text-accent transition-colors">Old Dominion University</h3>
+              <span class="text-xs font-mono text-accent/60 tracking-wider">USA</span>
+            </div>
+          </a>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-2.5">
+            <a href="https://inspirehep.net/authors/1905060" target="_blank" rel="noopener" class="member-link">Caleb Fogler</a>
+            <a href="https://inspirehep.net/authors/983861" target="_blank" rel="noopener" class="member-link">Lawrence Weinstein</a>
+          </div>
+        </div>
+
+        <!-- University of York -->
+        <div class="p-8 rounded-2xl bg-white/[0.03] border border-white/5 card-hover">
+          <a href="https://www.york.ac.uk/" target="_blank" rel="noopener" class="flex items-center gap-5 mb-6 group/logo">
+            <picture>
+              <source srcset="assets/logos/york.webp" type="image/webp">
+              <img src="assets/logos/york.png" alt="University of York" loading="lazy" decoding="async" class="h-14 w-auto brightness-0 invert opacity-80 group-hover/logo:opacity-100 transition-opacity">
+            </picture>
+            <div>
+              <h3 class="text-lg font-semibold text-white group-hover/logo:text-accent transition-colors">University of York</h3>
+              <span class="text-xs font-mono text-accent/60 tracking-wider">UK</span>
+            </div>
+          </a>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-2.5">
+            <a href="https://inspirehep.net/authors/1720228" target="_blank" rel="noopener" class="member-link">Jhanzeb Ahmad</a>
+            <a href="https://inspirehep.net/authors/1403300" target="_blank" rel="noopener" class="member-link">Stuart Fegan</a>
+            <a href="https://inspirehep.net/authors/1037820" target="_blank" rel="noopener" class="member-link">Daniel Watts</a>
+            <a href="https://inspirehep.net/search?q=a%20Rhidian%20Williams" target="_blank" rel="noopener" class="member-link">Rhidian Williams</a>
+            <a href="https://inspirehep.net/authors/1057798" target="_blank" rel="noopener" class="member-link">Nick Zachariou</a>
+          </div>
+        </div>
+
+        <!-- Universitat de Valencia -->
+        <div class="p-8 rounded-2xl bg-white/[0.03] border border-white/5 card-hover">
+          <a href="https://www.uv.es/" target="_blank" rel="noopener" class="flex items-center gap-5 mb-6 group/logo">
+            <picture>
+              <source srcset="assets/logos/valencia.webp" type="image/webp">
+              <img src="assets/logos/valencia.png" alt="Universitat de Val&egrave;ncia" loading="lazy" decoding="async" class="h-14 w-auto brightness-0 invert opacity-80 group-hover/logo:opacity-100 transition-opacity">
+            </picture>
+            <div>
+              <h3 class="text-lg font-semibold text-white group-hover/logo:text-accent transition-colors">Universitat de Val&egrave;ncia</h3>
+              <span class="text-xs font-mono text-accent/60 tracking-wider">SPAIN</span>
+            </div>
+          </a>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-2.5">
+            <a href="https://inspirehep.net/authors/1671275" target="_blank" rel="noopener" class="member-link">Julia Tena Vidal</a>
+          </div>
+        </div>
+
+        <!-- University of Pittsburgh -->
+        <div class="p-8 rounded-2xl bg-white/[0.03] border border-white/5 card-hover">
+          <a href="https://www.pitt.edu/" target="_blank" rel="noopener" class="flex items-center gap-5 mb-6 group/logo">
+            <picture>
+              <source srcset="assets/logos/pitt2.webp" type="image/webp">
+              <img src="assets/logos/pitt2.png" alt="University of Pittsburgh" loading="lazy" decoding="async" class="h-16 w-auto opacity-90 group-hover/logo:opacity-100 transition-opacity">
+            </picture>
+            <div>
+              <h3 class="text-lg font-semibold text-white group-hover/logo:text-accent transition-colors">University of Pittsburgh</h3>
+              <span class="text-xs font-mono text-accent/60 tracking-wider">USA</span>
+            </div>
+          </a>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-2.5">
+            <a href="https://inspirehep.net/authors/1011092" target="_blank" rel="noopener" class="member-link">Steve Dytman</a>
+          </div>
+        </div>
+
+        <!-- University of Southern Maine -->
+        <div class="p-8 rounded-2xl bg-white/[0.03] border border-white/5 card-hover">
+          <a href="https://usm.maine.edu/" target="_blank" rel="noopener" class="flex items-center gap-5 mb-6 group/logo">
+            <picture>
+              <source srcset="assets/logos/usm.webp" type="image/webp">
+              <img src="assets/logos/usm.png" alt="University of Southern Maine" loading="lazy" decoding="async" class="h-12 w-auto opacity-90 group-hover/logo:opacity-100 transition-opacity">
+            </picture>
+            <div>
+              <h3 class="text-lg font-semibold text-white group-hover/logo:text-accent transition-colors">University of Southern Maine</h3>
+              <span class="text-xs font-mono text-accent/60 tracking-wider">USA</span>
+            </div>
+          </a>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-2.5">
+            <a href="https://inspirehep.net/authors/1054800" target="_blank" rel="noopener" class="member-link">Brandon Eberly</a>
+          </div>
+        </div>
+
+        <!-- Ohio University -->
+        <div class="p-8 rounded-2xl bg-white/[0.03] border border-white/5 card-hover">
+          <a href="https://www.ohio.edu/" target="_blank" rel="noopener" class="flex items-center gap-5 mb-6 group/logo">
+            <picture>
+              <source srcset="assets/logos/ohio.webp" type="image/webp">
+              <img src="assets/logos/ohio.png" alt="Ohio University" loading="lazy" decoding="async" class="h-14 w-auto opacity-90 group-hover/logo:opacity-100 transition-opacity">
+            </picture>
+            <div>
+              <h3 class="text-lg font-semibold text-white group-hover/logo:text-accent transition-colors">Ohio University</h3>
+              <span class="text-xs font-mono text-accent/60 tracking-wider">USA</span>
+            </div>
+          </a>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-2.5">
+            <a href="https://inspirehep.net/search?q=a%20Noah%20Smith%20AND%20a%20Djalali" target="_blank" rel="noopener" class="member-link">Noah Smith</a>
+            <a href="https://inspirehep.net/authors/1055862" target="_blank" rel="noopener" class="member-link">Chaden Djalali</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Publications Section -->
+  <section id="publications" class="relative py-32 px-6 bg-deepblue/30">
+    <div class="max-w-6xl mx-auto">
+      <div class="reveal text-center mb-16">
+        <span class="text-accent font-mono text-sm tracking-widest uppercase mb-4 block">Research Output</span>
+        <h2 class="text-4xl md:text-5xl font-bold text-white">Publications</h2>
+      </div>
+
+      <div
+        class="reveal max-w-5xl mx-auto"
+        data-publications-root
+        data-publications-limit="3"
+        data-publications-archive-url="publications.html"
+      >
+        <div
+          data-publications-status
+          class="text-center text-sm text-gray-500 font-mono py-12"
+          role="status"
+          aria-live="polite"
+        >
+          Loading publications...
+        </div>
+        <div data-publications-list class="space-y-8"></div>
+        <div data-publications-cta class="hidden pt-10 text-center"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Talks Section -->
+  <section id="talks" class="relative py-32 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="reveal text-center mb-16">
+        <span class="text-accent font-mono text-sm tracking-widest uppercase mb-4 block">Presentations</span>
+        <h2 class="text-4xl md:text-5xl font-bold text-white">Recent Talks</h2>
+      </div>
+
+      <div class="reveal grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <a href="https://agenda.infn.it/event/37867/contributions/234019/" target="_blank" rel="noopener"
+           class="group p-8 rounded-2xl bg-white/[0.03] border border-white/5 card-hover block">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
+              <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5"/>
+              </svg>
+            </div>
+            <span class="text-xs font-mono text-gray-600 tracking-wider">2024</span>
+          </div>
+          <h3 class="text-xl font-semibold text-white group-hover:text-accent transition-colors mb-2">Neutrino 2024</h3>
+          <p class="text-sm text-gray-500">International Conference on Neutrino Physics and Astrophysics</p>
+          <div class="mt-4 flex items-center gap-2 text-accent/70 text-sm group-hover:text-accent transition-colors">
+            <span>View contribution</span>
+            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+            </svg>
+          </div>
+        </a>
+
+        <a href="https://indico.cern.ch/event/1528564/contributions/6614846/" target="_blank" rel="noopener"
+           class="group p-8 rounded-2xl bg-white/[0.03] border border-white/5 card-hover block">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
+              <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5"/>
+              </svg>
+            </div>
+            <span class="text-xs font-mono text-gray-600 tracking-wider">2025</span>
+          </div>
+          <h3 class="text-xl font-semibold text-white group-hover:text-accent transition-colors mb-2">NuFACT 2025</h3>
+          <p class="text-sm text-gray-500">International Workshop on Neutrino Factories, Super Beams and Beta Beams</p>
+          <div class="mt-4 flex items-center gap-2 text-accent/70 text-sm group-hover:text-accent transition-colors">
+            <span>View contribution</span>
+            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+            </svg>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Join Section -->
+  <section id="join" class="relative py-32 px-6 bg-deepblue/30 overflow-hidden">
+    <!-- Decorative background -->
+    <div class="absolute inset-0 opacity-30">
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-accent/5 blur-[120px]"></div>
+    </div>
+
+    <div class="reveal relative z-10 max-w-3xl mx-auto text-center">
+      <span class="text-accent font-mono text-sm tracking-widest uppercase mb-4 block">Get Involved</span>
+      <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">Join the Collaboration</h2>
+      <p class="text-gray-400 text-lg leading-relaxed mb-10 max-w-2xl mx-auto">
+        We welcome students and researchers interested in neutrino and electron scattering physics to join our effort!
+      </p>
+      <a href="mailto:adishka@tauex.tau.ac.il"
+         class="inline-flex items-center gap-3 px-8 py-4 bg-accent text-navy font-semibold rounded-full hover:bg-glow transition-colors text-lg">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/>
+        </svg>
+        Contact Us
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-12 px-6 border-t border-white/5">
+    <div class="max-w-6xl mx-auto flex flex-col items-center gap-6 text-center lg:flex-row lg:justify-between lg:text-left">
+      <div class="flex items-center gap-3">
+        <span class="text-xl font-bold tracking-tight">
+          <span class="text-accent">e</span><span class="text-white">4</span><span class="text-accent">ν</span>
+        </span>
+        <span class="text-gray-600 text-sm">&mdash; Electrons for Neutrinos</span>
+      </div>
+      <a
+        href="https://erc.europa.eu/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="European Research Council website"
+        class="group inline-flex items-center gap-3 text-sm text-gray-500 transition-colors hover:text-gray-300"
+      >
+        <picture>
+          <source srcset="assets/logos/erc.webp" type="image/webp">
+          <img
+            src="assets/logos/erc.png"
+            alt="European Research Council logo"
+            loading="lazy"
+            decoding="async"
+            class="h-16 w-auto shrink-0 [filter:drop-shadow(0_0_10px_rgba(255,255,255,0.9))]"
+          >
+        </picture>
+        <span class="whitespace-nowrap">Funded by <span class="font-medium text-gray-300 transition-colors group-hover:text-white">ERC</span></span>
+      </a>
+      <div class="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-600">
+        <a href="#about" class="hover:text-accent transition-colors">About</a>
+        <a href="#team" class="hover:text-accent transition-colors">Team</a>
+        <a href="#publications" class="hover:text-accent transition-colors">Publications</a>
+        <a href="#join" class="hover:text-accent transition-colors">Join</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/app.js" defer></script>
+  <script src="assets/js/config.js" defer></script>
+  <script src="assets/js/lib/dom.js" defer></script>
+  <script src="assets/js/lib/timers.js" defer></script>
+  <script src="assets/js/lib/phase-loop.js" defer></script>
+  <script src="assets/js/features/particles.js" defer></script>
+  <script src="assets/js/features/reveal.js" defer></script>
+  <script src="assets/js/features/navigation.js" defer></script>
+  <script src="assets/js/features/carousel.js" defer></script>
+  <script src="assets/js/features/publications.js" defer></script>
+  <script src="assets/js/features/about-tabs.js" defer></script>
+  <script src="assets/js/features/mec.js" defer></script>
+  <script src="assets/js/features/res.js" defer></script>
+  <script src="assets/js/features/dis.js" defer></script>
+  <script src="assets/js/features/chipmunk.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+
+</body>
+</html>

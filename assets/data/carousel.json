@@ -1,0 +1,30 @@
+[
+  {
+    "id": "collab-1",
+    "imageSrc": "assets/images/carousel/collab-1-upright.webp",
+    "imageFallbackSrc": "assets/images/carousel/collab-1-upright.jpg",
+    "imageAlt": "e4nu collaboration photo collab 1",
+    "caption": "e4ν Collaboration at Jefferson Lab Hall B"
+  },
+  {
+    "id": "collab-2",
+    "imageSrc": "assets/images/carousel/collab-2.webp",
+    "imageFallbackSrc": "assets/images/carousel/collab-2.jpg",
+    "imageAlt": "e4ν Collaboration at Jefferson Lab Hall B",
+    "caption": "e4ν Collaboration at Jefferson Lab Hall B"
+  },
+  {
+    "id": "collab-cables",
+    "imageSrc": "assets/images/carousel/collab-cables.webp",
+    "imageFallbackSrc": "assets/images/carousel/collab-cables.jpeg",
+    "imageAlt": "e4nu collaboration photo collab cables",
+    "caption": "e4ν Collaboration at Jefferson Lab Hall B"
+  },
+  {
+    "id": "collab-long",
+    "imageSrc": "assets/images/carousel/collab-long.webp",
+    "imageFallbackSrc": "assets/images/carousel/collab-long.jpeg",
+    "imageAlt": "e4nu collaboration photo collab long",
+    "caption": "e4ν Collaboration at Jefferson Lab Hall B"
+  }
+]

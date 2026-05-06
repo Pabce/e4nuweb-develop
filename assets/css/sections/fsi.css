@@ -1,0 +1,670 @@
+/* Final-state interaction visualization */
+.fsi-card {
+  background:
+    radial-gradient(circle at 10% 16%, rgba(244, 114, 182, 0.08), transparent 26%),
+    radial-gradient(circle at 88% 22%, rgba(250, 204, 21, 0.08), transparent 22%),
+    linear-gradient(145deg, rgba(15, 40, 71, 0.58), rgba(7, 16, 30, 0.9));
+}
+
+.fsi-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.fsi-phase-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.72rem 1rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  background: rgba(15, 23, 42, 0.42);
+  color: rgba(226, 232, 240, 0.86);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: border-color 0.34s ease, background 0.34s ease, color 0.34s ease, box-shadow 0.34s ease, transform 0.34s ease;
+}
+
+.fsi-phase-button:hover {
+  border-color: rgba(251, 113, 133, 0.42);
+  color: #fff1f2;
+  transform: translateY(-1px);
+}
+
+.fsi-phase-button.is-active {
+  border-color: rgba(251, 113, 133, 0.62);
+  background: rgba(225, 29, 72, 0.14);
+  color: #fff1f2;
+  box-shadow: 0 0 0 1px rgba(251, 113, 133, 0.12), 0 0 28px rgba(225, 29, 72, 0.16);
+}
+
+.fsi-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+}
+
+.fsi-stage {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(251, 113, 133, 0.18);
+  border-radius: 1.5rem;
+  background:
+    radial-gradient(circle at 22% 50%, rgba(56, 189, 248, 0.08), transparent 23%),
+    radial-gradient(circle at 74% 34%, rgba(244, 114, 182, 0.08), transparent 18%),
+    linear-gradient(180deg, rgba(6, 12, 24, 0.12), rgba(6, 12, 24, 0.82));
+}
+
+.fsi-stage-panel[hidden] {
+  display: none;
+}
+
+.fsi-panel {
+  padding: 1.2rem 1.25rem;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  background: linear-gradient(135deg, rgba(8, 16, 30, 0.74), rgba(10, 26, 45, 0.5));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03), 0 20px 44px rgba(2, 6, 23, 0.2);
+}
+
+.fsi-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.fsi-row {
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  background: linear-gradient(135deg, rgba(8, 16, 30, 0.74), rgba(12, 30, 55, 0.48));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03), 0 20px 48px rgba(2, 6, 23, 0.24);
+  padding: 1rem;
+}
+.fsi-row-grid {
+  display: grid;
+  gap: 1.25rem;
+  align-items: center;
+}
+.fsi-visual-stage {
+  position: relative;
+  overflow: hidden;
+  min-height: 15.5rem;
+  border: 1px solid rgba(56, 189, 248, 0.18);
+  background:
+    radial-gradient(circle at 24% 45%, rgba(56, 189, 248, 0.08), transparent 20%),
+    linear-gradient(180deg, rgba(6, 12, 24, 0.2), rgba(6, 12, 24, 0.78));
+}
+.fsi-visual-stage::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.02), transparent),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 42px,
+      rgba(56, 189, 248, 0.035) 43px,
+      transparent 44px
+    );
+}
+.fsi-row-svg {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.fsi-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  max-width: 58rem;
+}
+.fsi-copy-title {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+  margin: 0;
+  color: #f8fafc;
+  font-size: 1.45rem;
+  font-weight: 700;
+  line-height: 1.15;
+}
+.fsi-index {
+  color: #fda4af;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.95rem;
+  letter-spacing: 0.1em;
+}
+.fsi-copy p {
+  margin: 0;
+  color: rgba(226, 232, 240, 0.84);
+  line-height: 1.7;
+}
+.fsi-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+.fsi-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.48rem 0.78rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  background: rgba(15, 23, 42, 0.42);
+  color: rgba(226, 232, 240, 0.9);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.76rem;
+  letter-spacing: 0.02em;
+}
+@media (min-width: 960px) {
+  .fsi-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.14fr) minmax(18rem, 0.86fr);
+    gap: 1.5rem;
+    align-items: stretch;
+  }
+  .fsi-row {
+    padding: 1.2rem;
+  }
+  .fsi-row-grid {
+    grid-template-columns: minmax(0, 1.14fr) minmax(18rem, 0.86fr);
+    gap: 1.5rem;
+  }
+}
+.fsi-medium-halo,
+.fsi-medium-shell,
+.fsi-vertex-flash,
+.fsi-conversion-flash,
+.fsi-production-flash,
+.fsi-absorption-flash,
+.fsi-detector-hit {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.fsi-medium-halo {
+  fill: rgba(56, 189, 248, 0.13);
+  animation: fsiMediumBreath var(--fsi-duration) ease-in-out infinite;
+}
+.fsi-medium-shell {
+  fill: none;
+  stroke: rgba(125, 211, 252, 0.58);
+  stroke-width: 3;
+  animation: fsiShellBreath var(--fsi-duration) ease-in-out infinite;
+}
+.fsi-track-in,
+.fsi-track-guide,
+.fsi-track-soft,
+.fsi-track-neutron-out,
+.fsi-track-pion,
+.fsi-track-knockout-a,
+.fsi-track-knockout-b {
+  fill: none;
+  stroke-linecap: round;
+}
+.fsi-track-in {
+  stroke: rgba(125, 211, 252, 0.32);
+  stroke-width: 2.4;
+}
+.fsi-track-guide {
+  stroke: rgba(148, 163, 184, 0.18);
+  stroke-width: 1.9;
+  stroke-dasharray: 7 8;
+}
+.fsi-track-soft,
+.fsi-track-neutron-out,
+.fsi-track-pion,
+.fsi-track-knockout-a,
+.fsi-track-knockout-b {
+  stroke-width: 2.6;
+  opacity: 0.1;
+}
+.fsi-track-soft {
+  stroke: rgba(248, 113, 113, 0.62);
+  stroke-dasharray: 7 8;
+  animation: fsiTrackSoft var(--fsi-duration) linear infinite;
+}
+.fsi-track-neutron-out {
+  stroke: rgba(226, 232, 240, 0.76);
+  stroke-dasharray: 7 8;
+  animation: fsiTrackNeutron var(--fsi-duration) linear infinite;
+}
+.fsi-track-pion {
+  stroke: rgba(250, 204, 21, 0.82);
+  stroke-dasharray: 6 7;
+  animation: fsiTrackPion var(--fsi-duration) linear infinite;
+}
+.fsi-track-knockout-a {
+  stroke: rgba(248, 113, 113, 0.62);
+  stroke-dasharray: 7 8;
+  animation: fsiTrackKnockoutA var(--fsi-duration) linear infinite;
+}
+.fsi-track-knockout-b {
+  stroke: rgba(226, 232, 240, 0.72);
+  stroke-dasharray: 7 8;
+  animation: fsiTrackKnockoutB var(--fsi-duration) linear infinite;
+}
+.fsi-vertex-flash,
+.fsi-conversion-flash,
+.fsi-production-flash,
+.fsi-absorption-flash {
+  opacity: 0;
+}
+.fsi-vertex-flash {
+  fill: rgba(244, 114, 182, 0.76);
+  animation: fsiImpactFlash var(--fsi-duration) linear infinite;
+}
+.fsi-conversion-flash {
+  fill: rgba(226, 232, 240, 0.74);
+  animation: fsiImpactFlash var(--fsi-duration) linear infinite;
+}
+.fsi-production-flash {
+  fill: rgba(250, 204, 21, 0.78);
+  animation: fsiProductionFlash var(--fsi-duration) linear infinite;
+}
+.fsi-absorption-flash {
+  fill: rgba(250, 204, 21, 0.72);
+  animation: fsiAbsorptionFlash var(--fsi-duration) linear infinite;
+}
+.fsi-row1-primary,
+.fsi-row1-out,
+.fsi-row2-primary,
+.fsi-row2-out,
+.fsi-row3-pion,
+.fsi-row3-knockout-a,
+.fsi-row3-knockout-b {
+  opacity: 0;
+}
+.fsi-row1-primary,
+.fsi-row2-primary {
+  animation: fsiLeadIn var(--fsi-duration) ease-in-out infinite;
+}
+.fsi-row1-out {
+  animation: fsiRow1Out var(--fsi-duration) ease-in-out infinite;
+}
+.fsi-row2-out {
+  animation: fsiRow2Out var(--fsi-duration) ease-in-out infinite;
+}
+.fsi-row3-pion {
+  animation: fsiRow3Pion var(--fsi-duration) ease-in-out infinite;
+}
+.fsi-row3-knockout-a {
+  animation: fsiRow3KnockoutA var(--fsi-duration) ease-in-out infinite;
+}
+.fsi-row3-knockout-b {
+  animation: fsiRow3KnockoutB var(--fsi-duration) linear infinite;
+}
+.fsi-particle-proton {
+  fill: #f87171;
+  filter: drop-shadow(0 0 10px rgba(248, 113, 113, 0.78));
+}
+.fsi-particle-neutron {
+  fill: #e2e8f0;
+  filter: drop-shadow(0 0 10px rgba(226, 232, 240, 0.5));
+}
+.fsi-particle-pion {
+  fill: #facc15;
+  filter: drop-shadow(0 0 10px rgba(250, 204, 21, 0.82));
+}
+.fsi-particle-label {
+  fill: #f8fafc;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+}
+.fsi-stage-caption,
+.fsi-detector-caption {
+  font-family: 'JetBrains Mono', monospace;
+}
+.fsi-stage-caption {
+  fill: #7dd3fc;
+  font-size: 13px;
+}
+.fsi-detector-caption {
+  fill: rgba(226, 232, 240, 0.72);
+  font-size: 12px;
+}
+.fsi-detector-box {
+  fill: rgba(8, 17, 34, 0.4);
+  stroke: rgba(125, 211, 252, 0.28);
+  stroke-width: 1.4;
+}
+.fsi-detector-hit {
+  opacity: 0.16;
+}
+.fsi-hit-proton {
+  fill: rgba(248, 113, 113, 0.92);
+  filter: drop-shadow(0 0 14px rgba(248, 113, 113, 0.72));
+}
+.fsi-hit-neutron {
+  fill: rgba(226, 232, 240, 0.92);
+  filter: drop-shadow(0 0 14px rgba(226, 232, 240, 0.58));
+}
+.fsi-row1-hit,
+.fsi-row2-hit {
+  animation: fsiDetectorHit var(--fsi-duration) linear infinite;
+}
+.fsi-row3-hit-a {
+  animation: fsiDetectorHitA var(--fsi-duration) linear infinite;
+}
+.fsi-row3-hit-b {
+  animation: fsiDetectorHitB var(--fsi-duration) linear infinite;
+}
+@keyframes fsiMediumBreath {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.86;
+  }
+  38% {
+    transform: scale(1.04);
+    opacity: 1;
+  }
+  72% {
+    transform: scale(0.99);
+    opacity: 0.78;
+  }
+}
+@keyframes fsiShellBreath {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.56;
+  }
+  38% {
+    transform: scale(1.06);
+    opacity: 0.9;
+  }
+  72% {
+    transform: scale(1.02);
+    opacity: 0.68;
+  }
+}
+@keyframes fsiImpactFlash {
+  0%, 22%, 100% {
+    opacity: 0;
+    transform: scale(0.35);
+  }
+
+  28% {
+    opacity: 0.94;
+    transform: scale(1.35);
+  }
+
+  36% {
+    opacity: 0;
+    transform: scale(0.75);
+  }
+}
+@keyframes fsiProductionFlash {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0.35);
+  }
+  10% {
+    opacity: 0.94;
+    transform: scale(1.28);
+  }
+  18% {
+    opacity: 0;
+    transform: scale(0.78);
+  }
+}
+
+@media (max-width: 640px) {
+  .fsi-phase-button {
+    line-height: 1.3;
+  }
+
+  .fsi-chip {
+    white-space: normal;
+  }
+}
+@keyframes fsiAbsorptionFlash {
+  0%, 34%, 100% {
+    opacity: 0;
+    transform: scale(0.35);
+  }
+  40% {
+    opacity: 0.96;
+    transform: scale(1.4);
+  }
+  48% {
+    opacity: 0;
+    transform: scale(0.78);
+  }
+}
+@keyframes fsiLeadIn {
+  0%, 4% {
+    transform: translate(0px, 0px);
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  24% {
+    transform: translate(104px, 0px);
+    opacity: 1;
+  }
+  32% {
+    transform: translate(104px, 0px);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(104px, 0px);
+    opacity: 0;
+  }
+}
+@keyframes fsiTrackSoft {
+  0%, 30%, 100% {
+    opacity: 0.08;
+    stroke-dashoffset: 0;
+  }
+  38% {
+    opacity: 0.95;
+  }
+  84% {
+    opacity: 0.42;
+    stroke-dashoffset: -44;
+  }
+}
+@keyframes fsiTrackNeutron {
+  0%, 30%, 100% {
+    opacity: 0.08;
+    stroke-dashoffset: 0;
+  }
+  38% {
+    opacity: 0.95;
+  }
+  84% {
+    opacity: 0.42;
+    stroke-dashoffset: -44;
+  }
+}
+@keyframes fsiRow1Out {
+  0%, 30% {
+    transform: translate(0px, 0px);
+    opacity: 0;
+  }
+  36% {
+    opacity: 1;
+  }
+  84% {
+    transform: translate(226px, -34px);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(226px, -34px);
+    opacity: 0;
+  }
+}
+@keyframes fsiRow2Out {
+  0%, 30% {
+    transform: translate(0px, 0px);
+    opacity: 0;
+  }
+  36% {
+    opacity: 1;
+  }
+  84% {
+    transform: translate(226px, 0px);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(226px, 0px);
+    opacity: 0;
+  }
+}
+@keyframes fsiTrackPion {
+  0%, 10%, 100% {
+    opacity: 0.06;
+    stroke-dashoffset: 0;
+  }
+  18% {
+    opacity: 0.92;
+  }
+  38% {
+    opacity: 0.35;
+    stroke-dashoffset: -26;
+  }
+  46% {
+    opacity: 0;
+  }
+}
+@keyframes fsiRow3Pion {
+  0%, 10% {
+    transform: translate(0px, 0px);
+    opacity: 0;
+  }
+  16% {
+    opacity: 1;
+  }
+  36% {
+    transform: translate(58px, 34px);
+    opacity: 1;
+  }
+  44% {
+    transform: translate(58px, 34px);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(58px, 34px);
+    opacity: 0;
+  }
+}
+@keyframes fsiTrackKnockoutA {
+  0%, 48%, 100% {
+    opacity: 0.06;
+    stroke-dashoffset: 0;
+  }
+  56% {
+    opacity: 0.92;
+  }
+  88% {
+    opacity: 0.42;
+    stroke-dashoffset: -34;
+  }
+}
+@keyframes fsiTrackKnockoutB {
+  0%, 48%, 100% {
+    opacity: 0.06;
+    stroke-dashoffset: 0;
+  }
+  56% {
+    opacity: 0.92;
+  }
+  88% {
+    opacity: 0.42;
+    stroke-dashoffset: -34;
+  }
+}
+@keyframes fsiRow3KnockoutA {
+  0%, 50% {
+    transform: translate(0px, 0px);
+    opacity: 0;
+  }
+  58% {
+    opacity: 1;
+  }
+  88% {
+    transform: translate(208px, -60px);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(208px, -60px);
+    opacity: 0;
+  }
+}
+@keyframes fsiRow3KnockoutB {
+  0%, 50% {
+    transform: translate(0px, 0px);
+    opacity: 0;
+  }
+  58% {
+    opacity: 1;
+    transform: translate(0px, 0px);
+  }
+  66% {
+    transform: translate(47px, 9px);
+    opacity: 1;
+  }
+  74% {
+    transform: translate(96px, 14px);
+    opacity: 1;
+  }
+  82% {
+    transform: translate(149px, 12px);
+    opacity: 1;
+  }
+  88% {
+    transform: translate(208px, 0px);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(208px, 0px);
+    opacity: 0;
+  }
+}
+@keyframes fsiDetectorHit {
+  0%, 66%, 100% {
+    opacity: 0.16;
+    transform: scale(0.72);
+  }
+  76% {
+    opacity: 0.92;
+    transform: scale(1.08);
+  }
+  90% {
+    opacity: 0.46;
+    transform: scale(0.9);
+  }
+}
+@keyframes fsiDetectorHitA {
+  0%, 72%, 100% {
+    opacity: 0.16;
+    transform: scale(0.72);
+  }
+  80% {
+    opacity: 0.92;
+    transform: scale(1.08);
+  }
+  90% {
+    opacity: 0.46;
+    transform: scale(0.9);
+  }
+}
+@keyframes fsiDetectorHitB {
+  0%, 76%, 100% {
+    opacity: 0.16;
+    transform: scale(0.72);
+  }
+  84% {
+    opacity: 0.92;
+    transform: scale(1.08);
+  }
+  92% {
+    opacity: 0.46;
+    transform: scale(0.9);
+  }
+}

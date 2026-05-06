@@ -1,0 +1,99 @@
+# e4nu Website
+
+This repository contains the static website for the e4nu collaboration.
+
+The site is made from plain HTML, CSS, JavaScript, JSON data files, and images. There is no build system and no package installation step: you only need Git, a web browser, and Python to run it locally.
+
+## What You Need
+
+Before starting, make sure you have:
+
+- **Git**, used to download the website code.
+- **Python 3**, used to start a small local web server.
+- A modern web browser such as Chrome, Firefox, Safari, or Edge.
+- An internet connection, because the site loads Tailwind CSS and fonts from external CDNs.
+
+On macOS, Git and Python are often already available. To check, open Terminal and run:
+
+```sh
+git --version
+python3 --version
+```
+
+If either command is missing, install Git from [git-scm.com](https://git-scm.com/) and Python from [python.org](https://www.python.org/downloads/).
+
+## Clone the Repository
+
+Open Terminal, move to the folder where you keep projects, and clone the repository:
+
+```sh
+cd ~/Desktop
+git clone https://github.com/Pabce/e4nuweb.git
+cd e4nuweb
+```
+
+The final command moves you into the website folder. All commands below assume you are inside that `e4nuweb` folder.
+
+## Run the Website Locally
+
+Start a local web server with:
+
+```sh
+python3 -m http.server 8000
+```
+
+Leave that Terminal window open while you work on the site. You should see output similar to:
+
+```text
+Serving HTTP on :: port 8000 ...
+```
+
+Now open your browser and go to:
+
+```text
+http://localhost:8000/
+```
+
+Useful local pages:
+
+- Home page: `http://localhost:8000/`
+- Publications page: `http://localhost:8000/publications.html`
+
+To stop the local server, return to the Terminal window where it is running and press:
+
+```text
+Control-C
+```
+
+## Making Changes
+
+Most edits happen in these files and folders:
+
+- `index.html`: the main home page.
+- `publications.html`: the publications page.
+- `assets/css/`: site styles.
+- `assets/js/`: site behavior.
+- `assets/data/`: editable JSON data used by the website.
+- `assets/images/`, `assets/photos/`, and `assets/logos/`: image assets.
+
+After saving a change, refresh the browser page to see it.
+
+## Troubleshooting
+
+If `http://localhost:8000/` does not open, check that the Terminal server is still running and that you started it from inside the `e4nuweb` folder.
+
+If port `8000` is already in use, run the server on another port:
+
+```sh
+python3 -m http.server 8080
+```
+
+Then open:
+
+```text
+http://localhost:8080/
+```
+
+If the page appears without styling, confirm that you are connected to the internet. The current site loads Tailwind CSS and fonts from external services.
+
+If images or publication data do not load correctly, make sure you are using the local server URL, such as `http://localhost:8000/`, rather than opening `index.html` directly from Finder.

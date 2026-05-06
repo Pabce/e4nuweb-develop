@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>e4nu Publications</title>
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#0a1628">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="assets/js/tailwind.config.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/site.css">
+</head>
+
+<body class="bg-navy text-gray-200 font-sans antialiased">
+  <nav id="navbar" class="fixed top-0 w-full z-50 nav-blur bg-navy/80 border-b border-white/5 transition-all duration-300">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="index.html#hero" class="flex items-center gap-3 group">
+        <picture>
+          <source srcset="assets/logos/e4nu-logo.webp" type="image/webp">
+          <img src="assets/logos/e4nu-logo.png" alt="e4nu" class="nav-logo">
+        </picture>
+      </a>
+      <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+        <a href="index.html#about" class="text-gray-400 hover:text-accent transition-colors">About</a>
+        <a href="index.html#team" class="text-gray-400 hover:text-accent transition-colors">Team</a>
+        <a href="#publications" class="text-accent transition-colors">Publications</a>
+        <a href="index.html#join" class="px-4 py-2 bg-accent/10 text-accent border border-accent/30 rounded-full hover:bg-accent/20 transition-all">
+          Back Home
+        </a>
+      </div>
+      <button id="mobile-menu-btn" class="md:hidden text-gray-400 hover:text-white" aria-label="Toggle navigation">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden border-t border-white/5 bg-navy/95 nav-blur">
+      <div class="px-6 py-4 flex flex-col gap-4 text-sm font-medium">
+        <a href="index.html#about" class="text-gray-400 hover:text-accent transition-colors mobile-link">About</a>
+        <a href="index.html#team" class="text-gray-400 hover:text-accent transition-colors mobile-link">Team</a>
+        <a href="#publications" class="text-accent mobile-link">Publications</a>
+        <a href="index.html#hero" class="text-gray-400 hover:text-accent transition-colors mobile-link">Back Home</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="relative pt-36 pb-16 px-6 overflow-hidden">
+    <div class="absolute inset-0 opacity-30">
+      <div class="absolute top-24 left-1/2 -translate-x-1/2 w-[640px] h-[640px] rounded-full bg-accent/5 blur-[140px]"></div>
+    </div>
+    <div class="reveal relative z-10 max-w-4xl mx-auto text-center">
+      <span class="text-accent font-mono text-sm tracking-widest uppercase mb-4 block">Research Output</span>
+      <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">All Publications</h1>
+      <p class="text-gray-400 text-lg leading-relaxed max-w-2xl mx-auto mb-10">
+        Browse the e4nu publication record.
+      </p>
+      <a
+        href="index.html#publications"
+        class="inline-flex items-center gap-3 px-6 py-3 bg-accent text-navy font-semibold rounded-full hover:bg-glow transition-colors"
+      >
+        Back to homepage
+      </a>
+    </div>
+  </section>
+
+  <section id="publications" class="relative pb-24 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="reveal max-w-5xl mx-auto" data-publications-root data-publications-limit="all">
+        <div
+          data-publications-status
+          class="text-center text-sm text-gray-500 font-mono py-12"
+          role="status"
+          aria-live="polite"
+        >
+          Loading publications...
+        </div>
+        <div data-publications-list class="space-y-8"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="py-12 px-6 border-t border-white/5">
+    <div class="max-w-6xl mx-auto flex flex-col items-center gap-6 text-center lg:flex-row lg:justify-between lg:text-left">
+      <div class="flex items-center gap-3">
+        <span class="text-xl font-bold tracking-tight">
+          <span class="text-accent">e</span><span class="text-white">4</span><span class="text-accent">ν</span>
+        </span>
+        <span class="text-gray-600 text-sm">&mdash; Electrons for Neutrinos</span>
+      </div>
+      <a
+        href="https://erc.europa.eu/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="European Research Council website"
+        class="group inline-flex items-center gap-3 text-sm text-gray-500 transition-colors hover:text-gray-300"
+      >
+        <picture>
+          <source srcset="assets/logos/erc.webp" type="image/webp">
+          <img
+            src="assets/logos/erc.png"
+            alt="European Research Council logo"
+            loading="lazy"
+            decoding="async"
+            class="h-14 w-auto shrink-0 [filter:drop-shadow(0_0_12px_rgba(255,255,255,0.32))]"
+          >
+        </picture>
+        <span class="whitespace-nowrap">Funded by <span class="font-medium text-gray-300 transition-colors group-hover:text-white">ERC</span></span>
+      </a>
+      <div class="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-600">
+        <a href="index.html#about" class="hover:text-accent transition-colors">About</a>
+        <a href="index.html#team" class="hover:text-accent transition-colors">Team</a>
+        <a href="#publications" class="hover:text-accent transition-colors">Publications</a>
+        <a href="index.html#join" class="hover:text-accent transition-colors">Join</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/app.js" defer></script>
+  <script src="assets/js/config.js" defer></script>
+  <script src="assets/js/lib/dom.js" defer></script>
+  <script src="assets/js/features/reveal.js" defer></script>
+  <script src="assets/js/features/navigation.js" defer></script>
+  <script src="assets/js/features/publications.js" defer></script>
+  <script src="assets/js/publications-page.js" defer></script>
+</body>
+</html>

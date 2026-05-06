@@ -1,0 +1,109 @@
+/* 2p2h / MEC visualization */
+.mec-card {
+  background:
+    radial-gradient(circle at 12% 18%, rgba(250, 204, 21, 0.09), transparent 24%),
+    radial-gradient(circle at 86% 18%, rgba(16, 185, 129, 0.1), transparent 24%),
+    linear-gradient(145deg, rgba(15, 40, 71, 0.62), rgba(5, 13, 26, 0.94));
+}
+.mec-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.mec-phase-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.72rem 1rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  background: rgba(15, 23, 42, 0.42);
+  color: rgba(226, 232, 240, 0.86);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: border-color 0.34s ease, background 0.34s ease, color 0.34s ease, box-shadow 0.34s ease, transform 0.34s ease;
+}
+.mec-phase-button:hover {
+  border-color: rgba(110, 231, 183, 0.42);
+  color: #ecfdf5;
+  transform: translateY(-1px);
+}
+.mec-phase-button.is-active {
+  border-color: rgba(110, 231, 183, 0.62);
+  background: rgba(16, 185, 129, 0.14);
+  color: #ecfdf5;
+  box-shadow: 0 0 0 1px rgba(110, 231, 183, 0.12), 0 0 28px rgba(16, 185, 129, 0.16);
+}
+.mec-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+}
+.mec-stage {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(110, 231, 183, 0.18);
+  border-radius: 1.5rem;
+  background:
+    radial-gradient(circle at 52% 50%, rgba(56, 189, 248, 0.08), transparent 26%),
+    radial-gradient(circle at 74% 34%, rgba(16, 185, 129, 0.08), transparent 18%),
+    linear-gradient(180deg, rgba(6, 12, 24, 0.12), rgba(6, 12, 24, 0.82));
+}
+.mec-canvas {
+  display: block;
+  width: 100%;
+}
+.mec-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 58rem;
+}
+.mec-panel {
+  padding: 1.2rem 1.25rem;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  background: linear-gradient(135deg, rgba(8, 16, 30, 0.74), rgba(10, 26, 45, 0.5));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03), 0 20px 44px rgba(2, 6, 23, 0.2);
+}
+.mec-panel-title {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+  margin: 0 0 0.85rem;
+  color: #f8fafc;
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.15;
+}
+.mec-index {
+  color: #6ee7b7;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.92rem;
+  letter-spacing: 0.1em;
+}
+.mec-panel p {
+  margin: 0;
+  color: rgba(226, 232, 240, 0.84);
+  line-height: 1.7;
+}
+.mec-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 0.95rem;
+}
+.mec-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.48rem 0.78rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  background: rgba(15, 23, 42, 0.42);
+  color: rgba(226, 232, 240, 0.9);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.76rem;
+  letter-spacing: 0.02em;
+}
